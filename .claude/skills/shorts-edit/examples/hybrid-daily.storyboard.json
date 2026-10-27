@@ -1,0 +1,21 @@
+{
+  "id": "selftest",
+  "world": {"theme": "aurora", "chrome": {"left": "Day 07", "right": "$0 → *$1K MRR*"}},
+  "mood": "balanced",
+  "captions": {"replace": [{"say": "$0000", "show": "$1,000"}],
+               "emphasis": [{"say": "three things", "color": "accent"}, {"say": "real product", "color": "good", "italic": true}, {"say": "$0000", "color": "money"}]},
+  "beats": [
+    {"type": "chip", "id": "day", "text": "Day 07 · Building in public", "in": "hi", "out": "+2.3"},
+    {"type": "progress", "id": "mrr", "day": 7, "value": 0, "goal": 1000, "goal_label": "$1K", "in": "from $0", "out": "a month"},
+    {"type": "statement", "id": "three", "kicker": "This week", "lines": [["I shipped", "this week i ship"], ["*three* things.", "three things"]], "in": "this week i ship", "out": "first"},
+    {"type": "steps", "id": "what", "kicker": "What shipped", "in": "first", "out": "every week",
+     "items": [{"title": "A mobile app", "sub": "iOS and Android", "at": "a mobile app"},
+               {"title": "A backend", "sub": "30 services", "at": "a backend"},
+               {"title": "An automation", "sub": "saves 10 hours a week", "at": "an automation"}]},
+    {"type": "flow", "id": "how", "kicker": "The path", "in": "that is how", "theme": "dusk",
+     "nodes": [{"label": "An idea", "icon": "chat", "at": "an idea"}, {"label": "A build", "sub": "ship every day", "icon": "code", "at": "to a"},
+               {"label": "A real product", "icon": "rocket", "at": "real product", "payoff": true}]},
+    {"type": "subscribe", "id": "sub", "title": "Follow the journey", "sub": "A new build every day", "in": "follow the journey", "tap": "subscribe", "bell": "channel", "out": "channel"},
+    {"type": "chip", "id": "bye", "text": "See you tomorrow · *Day 08*", "in": "see you tomorrow", "dot": false}
+  ]
+}

@@ -1,0 +1,358 @@
+<style>
+  /* A: clients */
+  #cl { left:0; right:0; top:360px; display:flex; justify-content:center; gap:40px; }
+  .cc { width:480px; padding:40px 44px; display:flex; align-items:center; gap:28px; }
+  .cc .lg { width:110px; height:110px; border-radius:26px; filter:blur(5px); flex:none; }
+  .cc .t { font-size:40px; font-weight:700; } .cc .ip { margin-top:12px; font-size:22px; padding:8px 16px; display:inline-flex; gap:10px; align-items:center; border-radius:999px; background:rgba(60,240,140,.14); color:var(--good); border:1px solid rgba(60,240,140,.4); }
+  .cc .ip i { width:10px; height:10px; border-radius:50%; background:var(--good); display:block; }
+
+  /* B: the week */
+  #wk { left:150px; right:150px; top:250px; display:flex; gap:36px; }
+  .wc { flex:1; height:520px; padding:36px; position:relative; }
+  .wc .k { font-size:20px; margin-bottom:24px; }
+  .chk { display:flex; align-items:center; gap:16px; font-size:28px; margin:18px 0; color:var(--soft); }
+  .chk b { width:34px; height:34px; border-radius:9px; border:2px solid var(--line); display:flex; align-items:center; justify-content:center; color:#04101a; font-size:20px; }
+  #clk { font-size:96px; font-weight:700; letter-spacing:-.03em; color:var(--am); line-height:1; }
+  #brd { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:28px; }
+  #brd i { height:84px; border-radius:10px; background:#3c4043; display:flex; align-items:center; justify-content:center; font-style:normal; font-size:26px; font-weight:700; color:rgba(255,255,255,.75); }
+  #brd i.me { background:url(img/avatar.png) center/cover; }
+  #deck { margin-top:8px; height:300px; border-radius:16px; background:linear-gradient(140deg,#16224a,#0b1230); border:1px solid var(--line); position:relative; overflow:hidden; }
+  #deck .dt { position:absolute; left:26px; top:24px; font-size:26px; font-weight:700; }
+  #deck svg { position:absolute; left:40px; top:84px; }
+
+  /* C: comms */
+  #meet { left:180px; top:220px; width:780px; height:540px; background:#202124; padding:16px; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 70px; gap:12px; }
+  #meet .v { border-radius:12px; background:#3c4043; position:relative; display:flex; align-items:center; justify-content:center; }
+  #meet .v .avatar { width:130px; height:130px; } #meet .v .ini { width:130px; height:130px; border-radius:50%; background:#1e8e3e; display:flex; align-items:center; justify-content:center; font-size:56px; font-weight:700; }
+  #meet .v span { position:absolute; left:12px; bottom:10px; font-size:18px; color:#e8eaed; }
+  #meet .bar { grid-column:1 / span 2; display:flex; align-items:center; justify-content:space-between; padding:0 18px; color:#e8eaed; font-size:20px; }
+  #meet .bar .cs { display:flex; gap:14px; } #meet .bar .cs i { width:48px; height:48px; border-radius:50%; background:#3c4043; display:block; } #meet .bar .cs i.e { background:#ea4335; width:66px; border-radius:24px; }
+  #wa { left:1020px; top:180px; width:660px; height:640px; background:#0b141a; }
+  #wa .hd { height:76px; background:#202c33; display:flex; align-items:center; gap:16px; padding:0 22px; font-size:24px; color:#e9edef; }
+  #wa .hd .ini { width:46px; height:46px; border-radius:50%; background:#1e8e3e; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  #wa .hd small { display:block; font-size:16px; color:#8696a0; }
+  #wa .ms { padding:26px 22px; display:flex; flex-direction:column; gap:14px; }
+  .bb { max-width:440px; padding:14px 18px; border-radius:12px; font-size:22px; line-height:1.3; color:#e9edef; position:relative; }
+  .bb.in { background:#202c33; align-self:flex-start; } .bb.out { background:#005c4b; align-self:flex-end; }
+  .bb small { display:block; text-align:right; font-size:14px; color:rgba(233,237,239,.6); margin-top:4px; }
+  #fast { left:870px; top:820px; font-size:34px; }
+
+  /* C2: brand node */
+  #node { left:810px; top:320px; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #2b4bff, #0b1a8a 65%, #050a40); box-shadow:0 0 140px rgba(43,75,255,.8); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
+  #node .avatar { width:120px; height:120px; border:4px solid rgba(255,255,255,.85); }
+  #node b { font-size:40px; } #nodeK { left:0; right:0; top:690px; text-align:center; }
+
+  /* D: devvora.dev */
+  #site { left:360px; top:150px; width:1200px; height:780px; background:#f4f1eb; }
+  #site .view { position:absolute; left:0; right:0; top:46px; bottom:0; overflow:hidden; }
+  #site .pg { position:absolute; left:0; top:0; width:1200px; }
+  #site .pg img { width:1200px; display:block; }
+  .hl { position:absolute; border:4px solid var(--am); border-radius:6px; background:rgba(255,185,4,.12); box-shadow:0 0 30px rgba(255,185,4,.55); opacity:0; }
+
+  /* E: platforms */
+  #rail { left:110px; top:290px; display:flex; flex-direction:column; gap:22px; }
+  #rail .tile { width:96px; height:96px; border-radius:24px; opacity:.25; }
+  .pf { position:absolute; left:330px; top:220px; width:1460px; height:730px; }
+  .pl { position:absolute; left:1450px; top:120px; }
+  /* X */
+  #px { background:#000; color:#e7e9ea; }
+  #px .ban { height:230px; background:linear-gradient(180deg,#0b2a3a,#004a6a); }
+  #px .avatar { position:absolute; left:40px; top:150px; width:170px; height:170px; border:6px solid #000; }
+  #px .eb { position:absolute; right:40px; top:250px; padding:12px 26px; border:1px solid #536471; border-radius:999px; font-weight:700; font-size:22px; }
+  #px .info { position:absolute; left:40px; top:345px; right:40px; }
+  #px .nm { font-size:38px; font-weight:700; display:flex; align-items:center; gap:10px; } #px .nm svg { flex:none; }
+  #px .hd2 { font-size:24px; color:#71767b; margin-top:4px; } #px .bio { font-size:26px; margin-top:20px; line-height:1.4; }
+  #px .meta { font-size:22px; color:#71767b; margin-top:18px; } #px .meta a { color:#1d9bf0; }
+  #px .net { position:absolute; left:40px; bottom:40px; display:flex; gap:18px; }
+  #px .net i { width:64px; height:64px; border-radius:50%; background:#2f3336; display:block; border:3px solid #000; margin-left:-22px; }
+  #px .net span { font-size:24px; color:#e7e9ea; align-self:center; margin-left:20px; } #px .net span b { color:#1d9bf0; }
+  /* LinkedIn */
+  #pli { background:#f4f2ee; color:#191919; }
+  #pli .top { height:70px; background:#fff; display:flex; align-items:center; gap:20px; padding:0 30px; border-bottom:1px solid #e0dfdc; }
+  #pli .top .lg { width:46px; height:46px; border-radius:8px; background:#0a66c2; color:#fff; font-weight:700; font-size:32px; display:flex; align-items:center; justify-content:center; }
+  #pli .top .sr { width:380px; height:40px; border-radius:20px; border:1px solid #888; background:#edf3f8; }
+  #pli .prof { position:absolute; left:30px; top:96px; width:900px; height:600px; background:#fff; border-radius:12px; overflow:hidden; border:1px solid #e0dfdc; }
+  #pli .prof .ban { height:180px; background:linear-gradient(90deg,#111,#555); }
+  #pli .prof .avatar { position:absolute; left:34px; top:80px; width:180px; height:180px; border:5px solid #fff; }
+  #pli .prof .nm { position:absolute; left:34px; top:280px; font-size:38px; font-weight:600; }
+  #pli .prof .hd2 { position:absolute; left:34px; right:34px; top:338px; font-size:22px; line-height:1.4; }
+  #pli .prof .cn { position:absolute; left:34px; top:420px; font-size:22px; color:#0a66c2; font-weight:600; }
+  #pli .prof .bt { position:absolute; left:34px; top:476px; display:flex; gap:12px; }
+  #pli .prof .bt span { padding:10px 24px; border-radius:999px; border:1px solid #0a66c2; color:#0a66c2; font-weight:600; font-size:20px; } #pli .prof .bt span.p { background:#0a66c2; color:#fff; }
+  #pli .msg { position:absolute; right:30px; top:96px; width:480px; height:600px; background:#fff; border-radius:12px; border:1px solid #e0dfdc; padding:22px; }
+  #pli .msg .h { font-size:22px; font-weight:600; padding-bottom:16px; border-bottom:1px solid #e0dfdc; }
+  #pli .msg .row { display:flex; gap:14px; align-items:center; padding:16px 0; border-bottom:1px solid #f0efed; }
+  #pli .msg .row i { width:54px; height:54px; border-radius:50%; background:#c6c3be; display:block; flex:none; }
+  #pli .msg .row .l1 { height:14px; width:180px; border-radius:7px; background:#d9d6d1; } #pli .msg .row .l2 { height:12px; width:260px; border-radius:6px; background:#ebe9e5; margin-top:8px; }
+  #pli .acc { margin-top:18px; padding:14px 18px; border-radius:10px; background:#e8f3ec; color:#057642; font-weight:600; font-size:20px; }
+  /* Reddit */
+  #prd { background:#0e1113; color:#d7dadc; }
+  #prd .top { height:70px; display:flex; align-items:center; justify-content:space-between; padding:0 30px; border-bottom:1px solid #2a3236; }
+  #prd .top .lg { display:flex; align-items:center; gap:10px; font-weight:700; font-size:28px; color:#fff; } #prd .top .lg i { width:42px; height:42px; border-radius:50%; background:#ff4500; display:block; }
+  #prd .com { position:absolute; left:30px; top:100px; width:520px; background:#000; border-radius:14px; overflow:hidden; }
+  #prd .com .ban { height:110px; background:repeating-linear-gradient(90deg,#d0d4d6 0 18px,#e8eaeb 18px 40px); }
+  #prd .com .ic { position:absolute; left:26px; top:66px; width:84px; height:84px; border-radius:50%; background:#dceefb; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:30px; color:#e23d8f; border:3px solid #000; }
+  #prd .com .bd { padding:56px 26px 26px; } #prd .com .nm { font-size:28px; font-weight:700; color:#fff; } #prd .com .ds { font-size:20px; color:#9aa4a8; line-height:1.45; margin-top:10px; }
+  #prd .th { position:absolute; left:580px; top:100px; right:30px; }
+  #prd .post { background:#0e1113; border:1px solid #2a3236; border-radius:14px; padding:24px; }
+  #prd .post .q { font-size:28px; font-weight:700; color:#fff; } #prd .post .m { font-size:18px; color:#818384; margin-bottom:12px; }
+  #prd .cm { margin-top:18px; margin-left:40px; border-left:2px solid #2a3236; padding-left:24px; }
+  #prd .cm .u { display:flex; align-items:center; gap:12px; font-size:20px; color:#d7dadc; font-weight:600; } #prd .cm .u .avatar { width:40px; height:40px; }
+  #prd .cm .tx { font-size:22px; margin:10px 0; line-height:1.4; color:#d7dadc; }
+  #prd .cm .vt { display:flex; align-items:center; gap:12px; font-size:20px; color:#818384; } #prd .cm .vt b { color:#ff4500; font-size:22px; }
+  #prd .dm { margin-top:18px; margin-left:80px; padding:14px 20px; border-radius:12px; background:#1a282d; font-size:22px; color:#d7dadc; display:inline-block; }
+  /* Facebook */
+  #pfb { background:#f0f2f5; color:#050505; }
+  #pfb .top { height:70px; background:#fff; display:flex; align-items:center; gap:18px; padding:0 26px; box-shadow:0 1px 2px rgba(0,0,0,.1); }
+  #pfb .top .lg { width:46px; height:46px; border-radius:50%; background:#1877f2; color:#fff; font-weight:700; font-size:36px; display:flex; align-items:center; justify-content:center; }
+  #pfb .top .sr { width:300px; height:42px; border-radius:21px; background:#f0f2f5; }
+  #pfb .hdr { position:absolute; left:0; right:0; top:70px; height:270px; background:#fff; }
+  #pfb .hdr .avatar { position:absolute; left:120px; top:40px; width:190px; height:190px; border:5px solid #fff; }
+  #pfb .hdr .nm { position:absolute; left:340px; top:90px; font-size:46px; font-weight:700; } #pfb .hdr .fr { position:absolute; left:340px; top:152px; font-size:22px; color:#65676b; font-weight:600; }
+  #pfb .hdr .bt { position:absolute; right:60px; top:110px; display:flex; gap:12px; } #pfb .hdr .bt span { padding:12px 22px; border-radius:8px; background:#e4e6eb; font-weight:600; font-size:20px; } #pfb .hdr .bt span.p { background:#1877f2; color:#fff; }
+  #pfb .comp { position:absolute; left:440px; top:370px; width:620px; background:#fff; border-radius:12px; padding:20px; box-shadow:0 1px 2px rgba(0,0,0,.15); }
+  #pfb .comp .r { display:flex; gap:14px; align-items:center; } #pfb .comp .avatar { width:46px; height:46px; } #pfb .comp .in { flex:1; height:46px; border-radius:23px; background:#f0f2f5; font-size:20px; color:#65676b; display:flex; align-items:center; padding:0 18px; }
+  #pfb .fpost { position:absolute; left:440px; top:480px; width:620px; background:#fff; border-radius:12px; padding:20px; box-shadow:0 1px 2px rgba(0,0,0,.15); }
+  #pfb .fpost .r { display:flex; gap:12px; align-items:center; font-weight:600; font-size:20px; } #pfb .fpost .r .avatar { width:46px; height:46px; } #pfb .fpost .r small { display:block; font-weight:400; font-size:15px; color:#65676b; }
+  #pfb .fpost .tx { font-size:22px; margin:14px 0; } #pfb .fpost .im { height:150px; border-radius:8px; background:linear-gradient(120deg,#1a2a6b,#ffb904); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:34px; }
+  /* YouTube */
+  #pyt { background:#0f0f0f; color:#f1f1f1; }
+  #pyt .top { height:70px; display:flex; align-items:center; gap:10px; padding:0 30px; font-weight:700; font-size:26px; letter-spacing:-.04em; } #pyt .top i { width:42px; height:30px; border-radius:8px; background:#FF0033; display:block; }
+  #pyt .ban { position:absolute; left:60px; right:60px; top:86px; height:200px; border-radius:16px; background:linear-gradient(100deg,#ff5f7e,#c03070 35%,#3a3a9a 65%,#18c8d8); }
+  #pyt .avatar { position:absolute; left:60px; top:310px; width:170px; height:170px; }
+  #pyt .nm { position:absolute; left:270px; top:320px; font-size:56px; font-weight:700; } #pyt .st { position:absolute; left:270px; top:396px; font-size:24px; color:#aaa; } #pyt .st b { color:#f1f1f1; }
+  #pyt .lk { position:absolute; left:270px; top:440px; font-size:24px; color:#3ea6ff; }
+  #pyt .tabs { position:absolute; left:60px; top:500px; display:flex; gap:44px; font-size:26px; color:#aaa; font-weight:600; } #pyt .tabs b { color:#fff; border-bottom:3px solid #fff; padding-bottom:10px; }
+  #pyt .sh { position:absolute; left:60px; top:556px; display:flex; gap:16px; } #pyt .sh i { width:112px; height:150px; border-radius:12px; display:block; background:#222 center/cover; }
+
+  /* F: linking */
+  #lk .t { position:absolute; width:120px; height:120px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; box-shadow:0 20px 50px rgba(0,0,0,.5); }
+  #hub { position:absolute; left:860px; top:440px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #ffd36e, #ffb904 55%, #a06a00); display:flex; align-items:center; justify-content:center; color:#1a1000; font-weight:700; font-size:30px; box-shadow:0 0 100px rgba(255,185,4,.55); }
+  #visitor { r:14; }
+  #cta { left:1150px; top:885px; padding:18px 34px; border-radius:10px; background:#1d2f6f; color:#fff; font-weight:700; font-size:28px; }
+  #lkh { left:0; right:0; top:150px; text-align:center; }
+
+  /* G: Aéza */
+  #mail { left:230px; top:200px; width:1000px; height:560px; background:#fff; }
+  #mail img { width:1440px; display:block; transform-origin:0 0; }
+  #mhl { position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none; }
+  #vps { left:1290px; top:190px; width:420px; height:420px; }
+  #vps .rg { position:absolute; inset:0; }
+  #vps .c { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  #vps .c b { font-size:120px; line-height:1; color:var(--am); } #vps .c span { font-size:26px; color:var(--soft); }
+  #rack { left:1360px; top:650px; display:flex; flex-direction:column; gap:10px; }
+  #rack i { width:280px; height:54px; border-radius:12px; background:rgba(255,255,255,.08); border:1px solid var(--line); display:flex; align-items:center; padding-left:18px; }
+  #rack i b { width:12px; height:12px; border-radius:50%; background:var(--good); display:block; }
+  #rep { left:300px; top:790px; }
+</style>
+
+<div class="clip" id="sT" data-start="0" data-duration="2.85" data-track-index="2">
+  <div class="tcard" id="tc"><div class="k">CHAPTER 03</div><div class="box"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i><div class="tt">Building the Brand</div></div></div>
+</div>
+
+<div class="clip" id="sA" data-start="2.80" data-duration="6.25" data-track-index="2">
+  <div class="h3 abs" id="ah" style="left:0;right:0;top:200px;text-align:center">Alongside YouTube: <span class="am">the actual work</span></div>
+  <div class="abs" id="cl">
+    <div class="card cc"><div class="lg" style="background:linear-gradient(135deg,#ffb904,#ff6a3d)"></div><div><div class="t">Client A</div><div class="ip"><i></i>in progress</div></div></div>
+    <div class="card cc"><div class="lg" style="background:linear-gradient(135deg,#2b4bff,#0AF0F0)"></div><div><div class="t">Client B</div><div class="ip"><i></i>in progress</div></div></div>
+  </div>
+</div>
+
+<div class="clip" id="sB" data-start="9.00" data-duration="10.35" data-track-index="2">
+  <div class="mono abs" style="left:150px;top:180px;font-size:24px;color:var(--am)" id="bk">This week</div>
+  <div class="abs" id="wk">
+    <div class="card wc" id="w1"><div class="k mono" style="color:var(--soft)">01 · Deliverables</div>
+      <div class="chk"><b>✓</b>Feature updates shipped</div><div class="chk"><b>✓</b>Bugs fixed</div><div class="chk"><b>✓</b>Handed over</div></div>
+    <div class="card wc" id="w2"><div class="k mono" style="color:var(--soft)">02 · Board presentation</div><div id="clk">5:30 <span style="font-size:40px">AM</span></div>
+      <div id="brd"><i class="me"></i><i>B</i><i>M</i><i>R</i><i>K</i><i>S</i></div></div>
+    <div class="card wc" id="w3"><div class="k mono" style="color:var(--soft)">03 · The pitch</div>
+      <div id="deck"><div class="dt">Multi-agent automation</div>
+        <svg width="300" height="190" viewBox="0 0 300 190" fill="none"><path class="ag" d="M150 30 L50 150 M150 30 L150 150 M150 30 L250 150" stroke="rgba(255,185,4,.7)" stroke-width="4"/>
+          <circle cx="150" cy="30" r="26" fill="#ffb904"/><circle cx="50" cy="155" r="22" fill="#2b4bff"/><circle cx="150" cy="155" r="22" fill="#2b4bff"/><circle cx="250" cy="155" r="22" fill="#2b4bff"/></svg></div></div>
+  </div>
+</div>
+
+<div class="clip" id="sC" data-start="19.30" data-duration="7.30" data-track-index="2">
+  <div class="win" id="meet"><div class="v"><div class="avatar"></div><span>Dev Vora</span></div><div class="v"><div class="ini">C</div><span>Client</span></div>
+    <div class="bar"><span>Google Meet · 10:30</span><div class="cs"><i></i><i></i><i class="e"></i></div><span>⋯</span></div></div>
+  <div class="win" id="wa"><div class="hd"><div class="ini">C</div><div>Client<small>online</small></div></div>
+    <div class="ms"><div class="bb in">Can we see the latest build today?<small>10:02</small></div><div class="bb out">Yes, pushing it in an hour 🚀<small>10:03 ✓✓</small></div><div class="bb in">Perfect, thanks!<small>10:04</small></div></div></div>
+  <div class="pill abs" id="fast">⚡ fast &amp; streamlined</div>
+</div>
+
+<div class="clip" id="sC2" data-start="24.60" data-duration="4.10" data-track-index="2">
+  <div class="abs" id="node"><div class="avatar"></div><b>Dev Vora</b></div>
+  <div class="h3 abs" id="nodeK">Clients have to <span class="am">find you first</span></div>
+</div>
+
+<div class="clip" id="sD" data-start="28.55" data-duration="10.90" data-track-index="2">
+  <div class="win" id="site"><div class="chrome"><i></i><i></i><i></i><div class="url"><span id="url"></span></div></div>
+    <div class="view"><div class="pg" id="pg"><img src="img/devvora.png" alt="">
+      <div class="hl" id="h1" style="left:231px;top:1050px;width:184px;height:175px"></div><div class="hl" id="h2" style="left:415px;top:1050px;width:184px;height:175px"></div>
+      <div class="hl" id="h3" style="left:599px;top:1050px;width:184px;height:175px"></div><div class="hl" id="h4" style="left:784px;top:1050px;width:184px;height:175px"></div>
+      <div class="hl" id="h5" style="left:231px;top:1225px;width:184px;height:200px"></div><div class="hl" id="h6" style="left:415px;top:1225px;width:184px;height:200px"></div></div></div></div>
+</div>
+
+<div class="clip" id="sE" data-start="39.40" data-duration="19.35" data-track-index="2">
+  <div class="h3 abs" id="eh" style="left:110px;top:118px">5 platforms → <span class="am">one brand</span></div>
+  <div class="abs" id="rail">
+    <div class="tile" id="r1" style="background:#000;border:2px solid #333;font-size:54px">𝕏</div>
+    <div class="tile" id="r2" style="background:#0A66C2;font-size:54px">in</div>
+    <div class="tile" id="r3" style="background:#FF4500;font-size:46px">r/</div>
+    <div class="tile" id="r4" style="background:#1877F2;font-size:64px">f</div>
+    <div class="tile" id="r5" style="background:#FF0033"><svg width="46" height="46" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></div>
+  </div>
+
+  <div class="win pf" id="px"><div class="ban"></div><div class="avatar"></div><div class="eb">Follow</div>
+    <div class="info"><div class="nm">Dev vora <svg width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="M7 12.5 L10.5 16 L17 9" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="hd2">@Devvora15</div><div class="bio">I build the Softwares and Automations.<br>Currently building Smart Salesman, and Remori ✨✨</div>
+      <div class="meta">💼 Entrepreneur · 📍 Rajkot, India · 🔗 <a>devvora.dev</a></div></div>
+    <div class="net"><i style="background:#4a5a8a"></i><i style="background:#8a4a6a"></i><i style="background:#4a8a6a"></i><i style="background:#8a7a4a"></i><span><b>Building a network</b> · founders &amp; builders</span></div></div>
+
+  <div class="win pf" id="pli"><div class="top"><div class="lg">in</div><div class="sr"></div></div>
+    <div class="prof"><div class="ban"></div><div class="avatar"></div><div class="nm">Dev Vora</div>
+      <div class="hd2">Software Engineer | Ex-Intern @Grovyn | Databases | System Design | Data Analytics</div><div class="cn">500+ connections</div>
+      <div class="bt"><span class="p">Open to</span><span>View my services</span></div></div>
+    <div class="msg"><div class="h">Messaging</div><div class="row"><i></i><div><div class="l1"></div><div class="l2"></div></div></div><div class="row"><i></i><div><div class="l1"></div><div class="l2"></div></div></div><div class="row"><i></i><div><div class="l1"></div><div class="l2"></div></div></div>
+      <div class="acc" id="acc">✓ Connection request accepted</div></div></div>
+
+  <div class="win pf" id="prd"><div class="top"><div class="lg"><i></i>reddit</div><span style="font-size:20px">＋ Create</span></div>
+    <div class="com"><div class="ban"></div><div class="ic">&lt;/&gt;</div><div class="bd"><div class="nm">r/YourServiceGuy</div><div class="ds">A community for founders, small business owners, freelancers and builders trying to use technology to grow their businesses.</div></div></div>
+    <div class="th"><div class="post"><div class="m">r/smallbusiness · Posted by a founder</div><div class="q">Is it worth automating my booking emails?</div></div>
+      <div class="cm"><div class="u"><div class="avatar"></div>Devvora15</div><div class="tx">Yes. A simple workflow can sort, label and reply for you. Happy to show you how.</div><div class="vt">▲ <b id="up">1</b> ▼ · Reply</div></div>
+      <div class="dm" id="dm">💬 "Sent you a DM!"</div></div></div>
+
+  <div class="win pf" id="pfb"><div class="top"><div class="lg">f</div><div class="sr"></div></div>
+    <div class="hdr"><div class="avatar"></div><div class="nm">Dev Vora</div><div class="fr">Rajkot · Software &amp; automations</div><div class="bt"><span class="p">＋ Add to story</span><span>Edit profile</span></div></div>
+    <div class="comp"><div class="r"><div class="avatar"></div><div class="in">What's on your mind?</div></div></div>
+    <div class="fpost"><div class="r"><div class="avatar"></div><div>Dev Vora<small>Just now · 🌐</small></div></div><div class="tx">Need a website, app or automation for your business? 👇</div><div class="im">devvora.dev</div></div></div>
+
+  <div class="win pf" id="pyt"><div class="top"><i></i>YouTube</div><div class="ban"></div><div class="avatar"></div>
+    <div class="nm">Dev Vora</div><div class="st"><b>@devvora08</b> · 12 subscribers · 6 shorts</div><div class="lk">🔗 devvora.dev and 2 more links</div>
+    <div class="tabs"><span>Home</span><span>Videos</span><b>Shorts</b><span>Playlists</span></div>
+    <div class="sh"><i style="background-image:url(img/thumb1.png)"></i><i style="background-image:url(img/thumb2.png)"></i><i style="background-image:url(img/thumb3.png)"></i><i style="background-image:url(img/thumb4.png)"></i></div></div>
+</div>
+
+<div class="clip" id="sF" data-start="58.65" data-duration="15.95" data-track-index="2">
+  <div class="h3 abs" id="lkh">Each one, <span class="am">on its own</span></div>
+  <svg width="1920" height="1080" style="position:absolute;left:0;top:0" fill="none" id="links">
+    <g stroke="rgba(255,185,4,.55)" stroke-width="3">
+      <path class="lka" d="M460 380 Q 700 420 860 520"/><path class="lka" d="M1460 380 Q 1220 420 1060 520"/><path class="lka" d="M420 760 Q 650 720 870 600"/><path class="lka" d="M1500 760 Q 1270 720 1050 600"/><path class="lka" d="M960 900 L960 640"/>
+      <path class="lkb" d="M520 380 Q 960 250 1400 380" stroke="rgba(255,255,255,.22)"/><path class="lkb" d="M480 760 Q 960 960 1440 760" stroke="rgba(255,255,255,.22)"/>
+    </g>
+    <path id="vpath" d="M460 380 Q 700 420 860 520 M960 640 L960 640" stroke="none"/>
+    <circle id="visitor" r="14" fill="#0AF0F0"/>
+  </svg>
+  <div id="lk">
+    <div class="t" id="l1" style="left:340px;top:300px;background:#000;border:2px solid #333;font-size:60px">𝕏</div>
+    <div class="t" id="l2" style="left:1460px;top:300px;background:#FF0033"><svg width="54" height="54" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></div>
+    <div class="t" id="l3" style="left:300px;top:700px;background:#0A66C2;font-size:60px">in</div>
+    <div class="t" id="l4" style="left:1500px;top:700px;background:#FF4500;font-size:50px">r/</div>
+    <div class="t" id="l5" style="left:900px;top:860px;background:#1877F2;font-size:72px">f</div>
+    <div id="hub">devvora.dev</div>
+  </div>
+  <div class="abs" id="cta">Start a Project →</div>
+</div>
+
+<div class="clip" id="sG" data-start="74.60" data-duration="12.48" data-track-index="2">
+  <div class="h3 abs" id="gh" style="left:230px;top:90px">One more thing: <span class="am">Aéza</span></div>
+  <div class="win" id="mail"><img id="mimg" src="img/aeza.png" alt=""><div id="mhl"><div id="mhb" style="position:absolute;background:rgba(255,185,4,.45);mix-blend-mode:multiply;transform-origin:left"></div></div></div>
+  <div class="abs" id="vps"><svg class="rg" viewBox="0 0 420 420" fill="none"><circle cx="210" cy="210" r="190" stroke="rgba(255,255,255,.1)" stroke-width="18"/><circle id="vr" cx="210" cy="210" r="190" stroke="#ffb904" stroke-width="18" stroke-linecap="round" transform="rotate(-90 210 210)"/></svg>
+    <div class="c"><b id="vd">0</b><span>days · free VPS</span></div></div>
+  <div class="abs" id="rack"><i><b></b></i><i><b></b></i><i><b></b></i></div>
+  <div class="pill abs" id="rep" style="border-color:var(--am)">📄 Full report coming</div>
+</div>
+
+<script>
+const K = FW({ id: 'ch3', chapter: 3, duration: DUR, palette: ['#040a1e', '#1a36b0', '#ffb904', '#2b4bff'], doneAt: DUR - 0.8 });
+const { tl, IN, INS, OUT, DRAW, COUNT, TYPE } = K;
+K.TITLE('tc', 0.05, 2.75);
+
+// A · clients (2.9 - 9)
+IN('#ah', 2.9);
+tl.fromTo('#cl .cc', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out', stagger: .25 }, 7.8);
+OUT('#ah, #cl', 8.75);
+
+// B · this week (9 - 19.3)
+IN('#bk', 9.05, { x: -30 });
+IN('#w1', 9.2, { y: 60 }); tl.to('#w1 .chk b', { backgroundColor: '#3CF08C', borderColor: '#3CF08C', duration: .25, stagger: .35 }, 10.4); tl.to('#w1 .chk', { color: '#fff', duration: .25, stagger: .35 }, 10.4);
+IN('#w2', 11.6, { y: 60 }); tl.fromTo('#clk', { opacity: 0, scale: .8 }, { opacity: 1, scale: 1, duration: .5, ease: 'power3.out' }, 14.0);
+tl.fromTo('#brd i', { opacity: 0, scale: .8 }, { opacity: 1, scale: 1, duration: .4, ease: 'power3.out', stagger: .08 }, 13.1);
+IN('#w3', 16.2, { y: 60 }); DRAW('#deck .ag', 17.0, .8); tl.fromTo('#deck circle', { opacity: 0, scale: 0, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: .4, ease: 'power3.out', stagger: .1 }, 17.1);
+OUT('#bk, #wk', 19.0);
+
+// C · comms (19.3 - 24.6)
+tl.fromTo('#meet', { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: .7, ease: 'power3.out' }, 21.25);
+tl.fromTo('#wa', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: .7, ease: 'power3.out' }, 22.2);
+tl.fromTo('#wa .bb', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .35, ease: 'power3.out', stagger: .3 }, 22.7);
+IN('#fast', 23.9, { y: 20 });
+OUT('#meet, #wa, #fast', 24.45);
+
+// C2 · brand node (24.6 - 28.6)
+tl.fromTo('#node', { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .8, ease: 'power3.out' }, 24.75);
+IN('#nodeK', 25.0, { y: 24 });
+K.BG(26.6, ['#06081e', '#2a3ab8', '#ffb904', '#ff6a3d']);
+tl.to('#node', { scale: 1.12, boxShadow: '0 0 200px rgba(255,185,4,.6)', duration: 1.2, ease: 'sine.inOut' }, 26.8);
+OUT('#node, #nodeK', 28.3);
+
+// D · devvora.dev services (28.6 - 39.4)
+tl.fromTo('#site', { opacity: 0, y: 80, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'power3.out' }, 28.65);
+TYPE('#url', 29.4, 'devvora.dev', .8);
+tl.fromTo('#pg', { y: 0 }, { y: -1000, duration: 1.3, ease: 'power3.inOut' }, 30.3);
+[31.75, 33.3, 34.15, 36.2, 37.1, 38.15].forEach((t, i) => tl.to('#h' + (i + 1), { opacity: 1, duration: .3, ease: 'power2.out' }, t));
+tl.to('#site', { scale: 1.04, duration: 6, ease: 'sine.inOut' }, 31.6);
+OUT('#site', 39.1);
+
+// E · five platforms (39.4 - 58.7)
+IN('#eh', 39.45, { x: -30 });
+tl.fromTo('#rail .tile', { opacity: 0, x: -40 }, { opacity: .25, x: 0, duration: .5, ease: 'power3.out', stagger: .1 }, 39.9);
+const P = [['#px', '#r1', 41.95], ['#pli', '#r2', 44.3], ['#prd', '#r3', 47.15], ['#pfb', '#r4', 52.85], ['#pyt', '#r5', 55.45]];
+P.forEach(([w, r, t], i) => {
+  tl.fromTo(w, { opacity: 0, x: 140, scale: .96 }, { opacity: 1, x: 0, scale: 1, duration: .7, ease: 'power3.out' }, t);
+  tl.to(r, { opacity: 1, scale: 1.08, duration: .4, ease: 'power3.out' }, t);
+  if (i > 0) { tl.to(P[i - 1][1], { scale: 1, duration: .3 }, t); tl.to(P[i - 1][0], { opacity: 0, x: -100, scale: .96, duration: .5, ease: 'power2.inOut' }, t - 0.05); }
+});
+tl.fromTo('#px .net i', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .35, stagger: .12 }, 43.0);
+tl.fromTo('#acc', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' }, 46.0);
+COUNT('#up', 49.2, 24, 1.6); tl.fromTo('#dm', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' }, 51.4);
+tl.fromTo('#pfb .fpost', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, 53.9);
+tl.fromTo('#pyt .sh i', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .4, ease: 'power3.out', stagger: .1 }, 56.4);
+tl.to('#rail .tile', { opacity: 1, duration: .3 }, 57.6);
+OUT('#eh, #rail, #pyt', 58.4);
+
+// F · linking them up (58.7 - 74.6)
+IN('#lkh', 58.75);
+tl.fromTo('#lk .t', { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .55, ease: 'power3.out', stagger: .12 }, 59.0);
+tl.set('#lkh', { innerHTML: 'Linking them <span class="am">all up</span>' }, 62.6);
+tl.fromTo('#lkh', { opacity: .3 }, { opacity: 1, duration: .4 }, 62.6);
+tl.fromTo('#hub', { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .7, ease: 'power3.out' }, 63.2);
+DRAW('#links .lka', 64.6, .9); DRAW('#links .lkb', 69.2, 1.0);
+tl.to('#hub', { scale: 1.06, duration: .7, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 66.9);
+// a visitor travels X -> hub -> CTA
+const vis = document.getElementById('visitor'), seg = [[460, 380], [860, 520], [960, 540], [1150, 910]], vv = { p: 0 };
+tl.fromTo('#visitor', { opacity: 0 }, { opacity: 1, duration: .3 }, 71.0);
+tl.to(vv, { p: 1, duration: 2.6, ease: 'power1.inOut', onUpdate: () => { const f = vv.p * (seg.length - 1), i = Math.min(Math.floor(f), seg.length - 2), k = f - i;
+  vis.setAttribute('cx', seg[i][0] + (seg[i + 1][0] - seg[i][0]) * k); vis.setAttribute('cy', seg[i][1] + (seg[i + 1][1] - seg[i][1]) * k); } }, 71.1);
+IN('#cta', 72.9, { scale: .8 });
+tl.to('#cta', { backgroundColor: '#ffb904', color: '#1a1000', duration: .3 }, 73.6);
+OUT('#sF > *', 74.3);
+
+// G · Aéza (74.6 - 87.1)
+K.BG(74.5, ['#140c02', '#b06a00', '#ffb904', '#ff4d3d']);
+IN('#gh', 74.7, { x: -30 });
+tl.fromTo('#mail', { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: .8, ease: 'power3.out' }, 76.6);
+// the "VPS for testing ... 30 days" paragraph: image px ~(108,195)-(1360,250); shown at scale .69
+tl.fromTo('#mimg', { x: 0, y: 0, scale: .69 }, { x: -40, y: -90, scale: .9, duration: 1.2, ease: 'power3.inOut' }, 79.2);
+tl.set('#mhb', { left: 50, top: 82, width: 940, height: 44 }, 79.2);
+tl.fromTo('#mhb', { scaleX: 0 }, { scaleX: 1, duration: .8, ease: 'power2.inOut' }, 80.5);
+tl.fromTo('#vps', { opacity: 0, scale: .8 }, { opacity: 1, scale: 1, duration: .6, ease: 'power3.out' }, 81.7);
+const vr = document.getElementById('vr'), VL = 2 * Math.PI * 190; vr.style.strokeDasharray = VL;
+tl.fromTo(vr, { strokeDashoffset: VL }, { strokeDashoffset: 0, duration: 1.3, ease: 'power2.out' }, 81.9); COUNT('#vd', 81.9, 30, 1.3);
+tl.fromTo('#rack i', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .45, ease: 'power3.out', stagger: .12 }, 82.7);
+tl.to('#rack i b', { opacity: .3, duration: .3, yoyo: true, repeat: 7, stagger: .1 }, 83.2);
+IN('#rep', 84.4, { y: 24 });
+OUT('#sG > *', 86.6);
+
+K.SUBS(SUBS);
+K.done();
+</script>

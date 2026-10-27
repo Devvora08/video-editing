@@ -1,0 +1,146 @@
+<style>
+  #todo { left:640px; top:170px; width:640px; height:760px; padding:34px 40px; overflow:hidden; }
+  #todo .it { display:flex; align-items:center; gap:16px; font-size:28px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07); color:var(--soft); }
+  #todo .it b { width:26px; height:26px; border-radius:7px; border:2px solid var(--line); flex:none; }
+  #agents { left:0; right:0; top:330px; display:flex; justify-content:center; gap:28px; }
+  #agents .card { width:300px; padding:30px; text-align:center; }
+  #agents .card .ic { width:84px; height:84px; margin:0 auto 16px; border-radius:22px; background:linear-gradient(135deg,#0AF0F0,#22d46b); display:flex; align-items:center; justify-content:center; }
+  #agents .card .t { font-size:30px; font-weight:700; }
+
+  #term { left:360px; top:200px; width:1200px; height:640px; background:#0c1412; }
+  #term .bd { padding:30px 34px; font-family:"Geist Mono"; font-size:26px; line-height:1.7; color:#cfe9e2; }
+  #term .bd .p { color:#22d46b; } #term .bd .c { color:#0AF0F0; } #term .bd .d { color:#7a9a92; }
+
+  #pipe { left:110px; right:110px; top:390px; display:flex; align-items:center; justify-content:space-between; }
+  .st { width:200px; display:flex; flex-direction:column; align-items:center; gap:14px; position:relative; }
+  .st .bx { width:140px; height:140px; border-radius:30px; background:rgba(255,255,255,.06); border:2px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:58px; position:relative; }
+  .st .bx .ok { position:absolute; right:-10px; top:-10px; width:36px; height:36px; border-radius:50%; background:var(--good); color:#03140c; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:20px; transform:scale(0); }
+  .st .t { font-size:28px; font-weight:700; }
+  .ar { flex:1; height:3px; background:rgba(255,255,255,.18); margin:0 6px 46px; transform-origin:left; }
+  #pk { left:110px; top:260px; }
+
+  #dv { left:160px; top:170px; width:1600px; height:760px; background:#1c1c1e; }
+  #dv .hd { height:52px; background:#28282b; display:flex; align-items:center; gap:14px; padding:0 22px; font-size:20px; color:#ddd; }
+  #dv .hd .lg { width:30px; height:30px; border-radius:50%; background:conic-gradient(#e64c3c 0 33%, #f2c94c 0 66%, #3b8cdb 0); }
+  #dv .vw { position:absolute; left:400px; right:400px; top:80px; height:330px; background:#000; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#555; font-size:22px; }
+  #dv .tls { position:absolute; left:20px; right:20px; top:450px; bottom:20px; background:#232326; border-radius:6px; }
+  .trk { position:absolute; left:0; right:0; height:56px; border-bottom:1px solid #2e2e32; }
+  .trk .nm { position:absolute; left:0; top:0; width:70px; height:100%; background:#2b2b2f; color:#aaa; font-size:18px; display:flex; align-items:center; justify-content:center; }
+  .clipd { position:absolute; top:6px; height:44px; border-radius:5px; }
+  #ph { position:absolute; left:640px; top:0; bottom:0; width:2px; background:#e64c3c; }
+
+  #jobs { left:360px; top:200px; width:1200px; padding:36px 42px; }
+  #jobs .h { display:flex; justify-content:space-between; font-size:22px; color:var(--soft); margin-bottom:18px; }
+  .jr { display:flex; align-items:center; gap:22px; padding:22px 10px; border-top:1px solid rgba(255,255,255,.08); }
+  .jr .ic { width:64px; height:64px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:30px; color:#fff; flex:none; }
+  .jr .t { font-size:30px; font-weight:700; } .jr .s { font-size:20px; color:var(--soft); margin-top:4px; }
+  .jr .cr { margin-left:auto; font-family:"Geist Mono"; font-size:20px; color:var(--soft); }
+  .jr .bd { padding:8px 16px; border-radius:999px; font-size:18px; font-weight:700; background:rgba(60,240,140,.14); color:var(--good); border:1px solid rgba(60,240,140,.4); opacity:0; }
+
+  #split { left:220px; right:220px; top:300px; display:flex; gap:60px; }
+  #split .card { flex:1; padding:50px; text-align:center; }
+  #split .k { font-size:24px; } #split .t { font-size:72px; font-weight:700; margin-top:14px; }
+  #loopA { left:0; right:0; top:700px; text-align:center; }
+</style>
+
+<div class="clip" id="sT" data-start="0" data-duration="2.85" data-track-index="2">
+  <div class="tcard" id="tc"><div class="k">CHAPTER 05</div><div class="box"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i><div class="tt">My AI Crew</div></div></div>
+</div>
+
+<div class="clip" id="sA" data-start="2.80" data-duration="6.30" data-track-index="2">
+  <div class="card abs" id="todo"><div class="mono" style="font-size:22px;color:var(--cy);margin-bottom:10px">To do · today</div></div>
+  <div class="abs" id="agents">
+    <div class="card"><div class="ic"><svg width="44" height="44" viewBox="0 0 36 36" fill="none" stroke="#03140c" stroke-width="3.2"><rect x="5" y="10" width="26" height="20" rx="6"/><path d="M18 4 V10"/><circle cx="13" cy="20" r="2.5" fill="#03140c"/><circle cx="23" cy="20" r="2.5" fill="#03140c"/></svg></div><div class="t">Editing</div></div>
+    <div class="card"><div class="ic"><svg width="44" height="44" viewBox="0 0 36 36" fill="none" stroke="#03140c" stroke-width="3.2"><rect x="5" y="10" width="26" height="20" rx="6"/><path d="M18 4 V10"/><circle cx="13" cy="20" r="2.5" fill="#03140c"/><circle cx="23" cy="20" r="2.5" fill="#03140c"/></svg></div><div class="t">Outreach</div></div>
+    <div class="card"><div class="ic"><svg width="44" height="44" viewBox="0 0 36 36" fill="none" stroke="#03140c" stroke-width="3.2"><rect x="5" y="10" width="26" height="20" rx="6"/><path d="M18 4 V10"/><circle cx="13" cy="20" r="2.5" fill="#03140c"/><circle cx="23" cy="20" r="2.5" fill="#03140c"/></svg></div><div class="t">Networking</div></div>
+  </div>
+</div>
+
+<div class="clip" id="sB" data-start="9.05" data-duration="4.20" data-track-index="2">
+  <div class="win" id="term"><div class="chrome" style="background:#14201d"><i></i><i></i><i></i><div class="url" style="background:#1b2a26;color:#9fc">~/workflows</div></div>
+    <div class="bd"><div><span class="p">❯</span> <span id="cmd"></span></div><div id="o1" class="c">✻ Claude Code</div><div id="o2" class="d">  skills loaded: shorts-edit · davinci-edit</div><div id="o3" class="d">  scheduled jobs: 3 active</div><div id="o4"><span class="p">✓</span> ready</div></div></div>
+</div>
+
+<div class="clip" id="sC" data-start="13.20" data-duration="10.55" data-track-index="2">
+  <div class="h3 abs" id="pk">My <span class="cy">shorts editor</span></div>
+  <div class="abs" id="pipe">
+    <div class="st" id="p0"><div class="bx">🎬<span class="ok">✓</span></div><div class="t">Clips + voice</div></div><div class="ar" id="a1"></div>
+    <div class="st" id="p1"><div class="bx">✂️<span class="ok">✓</span></div><div class="t">Cut</div></div><div class="ar" id="a2"></div>
+    <div class="st" id="p2"><div class="bx">💬<span class="ok">✓</span></div><div class="t">Captions</div></div><div class="ar" id="a3"></div>
+    <div class="st" id="p3"><div class="bx">✨<span class="ok">✓</span></div><div class="t">Animations</div></div><div class="ar" id="a4"></div>
+    <div class="st" id="p4"><div class="bx">🔊<span class="ok">✓</span></div><div class="t">Sound</div></div><div class="ar" id="a5"></div>
+    <div class="st" id="p5"><div class="bx" style="background:rgba(10,240,240,.12);border-color:var(--cy)">MP4<span class="ok">✓</span></div><div class="t">Final file</div></div>
+  </div>
+</div>
+
+<div class="clip" id="sD" data-start="23.70" data-duration="5.80" data-track-index="2">
+  <div class="win" id="dv"><div class="hd"><span class="lg"></span>DaVinci Resolve · My First Week on YouTube</div><div class="vw">Timeline viewer</div>
+    <div class="tls"><div id="ph"></div>
+      <div class="trk" style="top:0"><span class="nm">V3</span></div><div class="trk" style="top:56px"><span class="nm">V2</span></div><div class="trk" style="top:112px"><span class="nm">V1</span></div><div class="trk" style="top:168px"><span class="nm">A1</span></div><div class="trk" style="top:224px"><span class="nm">A2</span></div></div></div>
+</div>
+
+<div class="clip" id="sE" data-start="29.45" data-duration="8.75" data-track-index="2">
+  <div class="card abs" id="jobs"><div class="h"><span class="mono">Scheduled jobs</span><span class="mono">runs daily</span></div>
+    <div class="jr" id="j1"><div class="ic" style="background:#000;border:2px solid #333">𝕏</div><div><div class="t">Cold outreach</div><div class="s">X · new founders &amp; builders</div></div><div class="cr">every day · 09:00</div><div class="bd">✓ done</div></div>
+    <div class="jr" id="j2"><div class="ic" style="background:#FF4500">r/</div><div><div class="t">Grow network</div><div class="s">Reddit · communities</div></div><div class="cr">every day · 12:00</div><div class="bd">✓ done</div></div>
+    <div class="jr" id="j3"><div class="ic" style="background:#0A66C2">in</div><div><div class="t">Grow network</div><div class="s">LinkedIn · connections</div></div><div class="cr">every day · 18:00</div><div class="bd">✓ done</div></div>
+  </div>
+</div>
+
+<div class="clip" id="sF" data-start="38.10" data-duration="7.22" data-track-index="2">
+  <div class="abs" id="split"><div class="card" id="m1"><div class="k mono" style="color:var(--soft)">Me</div><div class="t">Decisions</div></div><div class="card" id="m2"><div class="k mono" style="color:var(--soft)">Agents</div><div class="t cy">Execution</div></div></div>
+  <div class="h3 abs" id="loopA">= time for <span class="gd">everything else</span></div>
+</div>
+
+<script>
+const K = FW({ id: 'ch5', chapter: 5, duration: DUR, palette: ['#031412', '#0a6a5c', '#0AF0F0', '#22d46b'], doneAt: DUR - 0.8 });
+const { tl, IN, INS, OUT, DRAW, TYPE } = K;
+K.TITLE('tc', 0.05, 2.75);
+
+// A · too much for one person (2.9 - 9)
+const todo = document.getElementById('todo');
+['Client A · deliverables', 'Client B · review call', 'Script today\'s short', 'Record + edit', 'Reply on X', 'LinkedIn outreach', 'Reddit comments', 'Facebook post', 'Update devvora.dev', 'Check analytics', 'Invoice clients', 'Plan next video', 'Research trends'].forEach(t => todo.insertAdjacentHTML('beforeend', `<div class="it"><b></b>${t}</div>`));
+tl.fromTo('#todo', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out' }, 2.9);
+tl.fromTo('#todo .it', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .3, ease: 'power3.out', stagger: .25 }, 3.4);
+tl.to('#todo', { borderColor: 'rgba(255,77,106,.7)', duration: .4 }, 6.6);
+tl.to('#todo', { opacity: 0, scale: .9, filter: 'blur(8px)', duration: .45, ease: 'power2.in' }, 7.7);
+tl.fromTo('#agents .card', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: .55, ease: 'power3.out', stagger: .12 }, 7.95);
+OUT('#agents', 8.85);
+
+// B · terminal (9.1 - 13.2)
+tl.fromTo('#term', { opacity: 0, y: 60, scale: .96 }, { opacity: 1, y: 0, scale: 1, duration: .7, ease: 'power3.out' }, 9.1);
+TYPE('#cmd', 9.6, 'claude', .5);
+['#o1', '#o2', '#o3', '#o4'].forEach((s, i) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: .25 }, 10.4 + i * .5));
+OUT('#term', 12.95);
+
+// C · shorts editor pipeline (13.3 - 23.7)
+IN('#pk', 13.3, { x: -30 });
+[16.5, 18.0, 19.5, 20.45, 21.4, 22.15].forEach((t, i) => { IN('#p' + i, t, { y: 40, scale: .8 }, .55); if (i) tl.fromTo('#a' + i, { scaleX: 0 }, { scaleX: 1, duration: .4, ease: 'power2.out' }, t - .35); });
+[0, 1, 2, 3, 4, 5].forEach(i => tl.to(`#p${i} .ok`, { scale: 1, duration: .35, ease: 'power3.out' }, 22.4 + i * .12));
+tl.to('#p5 .bx', { boxShadow: '0 0 50px rgba(10,240,240,.5)', duration: .4 }, 23.0);
+OUT('#pk, #pipe', 23.45);
+
+// D · DaVinci Resolve timeline (23.7 - 29.5)
+tl.fromTo('#dv', { opacity: 0, y: 70, scale: .96 }, { opacity: 1, y: 0, scale: 1, duration: .7, ease: 'power3.out' }, 23.75);
+const tls = document.querySelector('#dv .tls');
+const CL = [[112, 80, 420, '#3b6ec4'], [112, 510, 380, '#3b6ec4'], [112, 900, 560, '#3b6ec4'], [56, 300, 180, '#8a4fc4'], [56, 700, 140, '#8a4fc4'], [56, 1100, 200, '#8a4fc4'], [0, 200, 120, '#c46a3b'], [0, 860, 160, '#c46a3b'], [168, 80, 1380, '#3bb07a'], [224, 80, 1380, '#2a8a6a']];
+CL.forEach(([y, x, w, c], i) => tls.insertAdjacentHTML('beforeend', `<div class="clipd" style="top:${y + 6}px;left:${x}px;width:${w}px;background:${c}"></div>`));
+tl.fromTo('#dv .clipd', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .35, ease: 'power3.out', stagger: .14 }, 24.6);
+tl.fromTo('#ph', { x: 0 }, { x: 600, duration: 4, ease: 'none' }, 25.3);
+tl.to('#dv .hd .lg', { rotation: 360, duration: 1.2, ease: 'power2.inOut' }, 27.8);
+OUT('#dv', 29.2);
+
+// E · scheduled jobs (29.5 - 38.2)
+tl.fromTo('#jobs', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .7, ease: 'power3.out' }, 29.5);
+[[1, 32.8], [2, 35.5], [3, 36.2]].forEach(([i, t]) => tl.fromTo('#j' + i, { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: .5, ease: 'power3.out' }, t));
+tl.to('#jobs .bd', { opacity: 1, duration: .35, stagger: .25 }, 36.9);
+OUT('#jobs', 37.95);
+
+// F · decisions vs execution (38.2 - 45.3)
+IN('#m1', 38.7, { x: -60 }); IN('#m2', 41.3, { x: 60 });
+IN('#loopA', 43.1, { y: 30 });
+OUT('#split, #loopA', 44.85);
+
+K.SUBS(SUBS);
+K.done();
+</script>

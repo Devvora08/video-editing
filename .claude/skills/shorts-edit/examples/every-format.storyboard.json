@@ -1,0 +1,25 @@
+{
+  "id": "gallery", "duration": 44, "camera": [["punch", 2.0, 1.12], ["release", 4.0, 0.5]],
+  "world": {"theme": "aurora", "chrome": {"left": "Day 07", "right": "$0 → *$1K MRR*"}},
+  "beats": [
+    {"type": "title", "id": "t1", "lines": ["From *$0* to", "$1K a month"], "in": 0.2, "out": 2.4},
+    {"type": "card", "id": "c1", "kicker": "Who", "title": "Dev Vora", "sub": "Full-stack developer", "icon": "code", "in": 2.6, "out": 5.0},
+    {"type": "list", "id": "l1", "kicker": "This week", "marker": "check", "in": 5.2, "out": 8.4, "items": [["A mobile app", 5.5], ["A backend", 6.2], ["An *automation*", 6.9]]},
+    {"type": "stat", "id": "s1", "kicker": "MRR goal", "value": 1000, "prefix": "$", "sub": "a month, from zero", "in": 8.6, "out": 11.0},
+    {"type": "pills", "id": "p1", "in": 11.2, "out": 13.4, "items": [{"text": "Next.js", "at": 11.3, "icon": "code"}, {"text": "Postgres", "at": 11.7, "icon": "db"}, {"text": "n8n", "at": 12.1, "tone": "accent"}, {"text": "TypeScript", "at": 12.5}]},
+    {"type": "logo", "id": "g1", "src": "img/logo.png", "in": 13.6, "out": 15.6},
+    {"type": "number", "id": "n1", "kicker": "Backend", "value": 30, "suffix": "+", "label": "microservices in *production*", "in": 16.0, "out": 19.5},
+    {"type": "bars", "id": "b1", "kicker": "Time", "title": "Hours a week", "in": 19.5, "out": 23.5,
+     "rows": [{"label": "By hand", "value": 10, "text": "10 h", "at": 20.2}, {"label": "Automated", "value": 0.5, "text": "30 min", "hi": true, "at": 21.4}]},
+    {"type": "browser", "id": "w1", "kicker": "Live", "src": "img/page.png", "domain": "filehubs.app", "scroll": 900, "in": 23.5, "out": 28.0,
+     "callout": {"x": 80, "y": 1100, "w": 500, "h": 200, "at": 26.6}, "label": "Shipped and *live*"},
+    {"type": "terminal", "id": "tm", "kicker": "Deploy", "title": "deploy.sh", "in": 28.0, "out": 32.5,
+     "lines": [{"text": "$ npm run deploy", "at": 28.6, "type": true}, {"text": "building 30 services...", "at": 30.0, "tone": "dim"}, {"text": "✓ all services live", "at": 31.0, "tone": "good"}]},
+    {"type": "clip", "id": "cl", "src": "broll/b.mp4", "label": "A piece of *b-roll*", "in": 32.5, "out": 35.0},
+    {"type": "image", "id": "im", "src": "img/photo.png", "fit": "card", "kicker": "The app", "label": "Framed still", "in": 35.0, "out": 37.5},
+    {"type": "raw", "id": "rw", "in": 37.5, "out": 40.0, "theme": "dusk", "times": {"a": 38.2},
+     "html": "<div class='kicker'>Hand-built</div><div class='disp' style='font-size:150px'><span class='ln'><span>Any <em>scene</em></span></span></div><div class='ssub' id='rw-s'>built from the same tokens</div>",
+     "js": "maskIn($('.ln > span'), GO); rise($('.kicker'), GO); rise('#rw-s', AT.a);"},
+    {"type": "cta", "id": "ct", "photo": "img/logo.png", "kicker": "Work with me", "lines": ["Got something", "to *build?*"], "url": "devvora.dev", "chips": ["Inquiry", "Discovery call", "WhatsApp"], "in": 40.0, "out": 44}
+  ]
+}

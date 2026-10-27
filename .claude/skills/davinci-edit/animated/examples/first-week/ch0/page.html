@@ -1,0 +1,136 @@
+<style>
+  /* A: YouTube Studio upload */
+  #up { left:460px; top:200px; width:1000px; height:600px; background:#282828; border-radius:16px; }
+  #up .hd { height:72px; display:flex; align-items:center; padding:0 30px; border-bottom:1px solid #3f3f3f; font-size:26px; font-weight:500; color:#f1f1f1; gap:16px; }
+  #up .hd .yt { width:44px; height:31px; border-radius:8px; background:#FF0033; display:flex; align-items:center; justify-content:center; }
+  #up .bd { display:flex; gap:34px; padding:40px 34px; }
+  #up .ph { width:240px; height:426px; border-radius:16px; background:linear-gradient(160deg,#1b1f3a,#0b0d18); flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; }
+  #up .ph .avatar { width:120px; height:120px; } #up .ph .dl { font-family:"Geist"; font-weight:300; font-size:44px; } #up .ph .dl b { font-weight:600; color:var(--cy); }
+  #up .meta { flex:1; }
+  #up .lab { font-size:18px; color:#aaa; margin-bottom:8px; }
+  #up .fld { border:1px solid #555; border-radius:6px; padding:14px 18px; font-size:24px; color:#f1f1f1; margin-bottom:26px; }
+  #up .bar { height:8px; background:#3f3f3f; border-radius:4px; overflow:hidden; margin-top:40px; }
+  #up .bar i { display:block; height:100%; background:#3ea6ff; transform-origin:left; }
+  #up .st { margin-top:14px; font-size:20px; color:#aaa; }
+  #pub { position:absolute; right:34px; bottom:30px; padding:14px 30px; border-radius:22px; background:#3ea6ff; color:#0f0f0f; font-weight:700; font-size:24px; }
+  #pubok { position:absolute; right:34px; bottom:30px; padding:14px 30px; border-radius:22px; background:#2ba640; color:#fff; font-weight:700; font-size:24px; }
+
+  /* B: week calendar + platforms */
+  #cal { left:360px; top:290px; display:flex; gap:22px; }
+  #cal .d { width:150px; height:190px; border-radius:22px; background:rgba(255,255,255,.05); border:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; }
+  #cal .d .w { font-family:"Geist Mono"; font-size:20px; letter-spacing:.2em; color:var(--soft); }
+  #cal .d .c { width:64px; height:64px; border-radius:50%; border:3px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; }
+  #cal .d .c svg { opacity:0; }
+  #plats { left:0; right:0; top:600px; display:flex; justify-content:center; gap:34px; }
+  #plats .tile { width:130px; height:130px; }
+
+  /* C: client call + plan A */
+  #call { left:250px; top:260px; width:720px; height:470px; background:#202124; border-radius:20px; padding:18px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  #call .v { border-radius:12px; background:#3c4043; position:relative; display:flex; align-items:center; justify-content:center; }
+  #call .v .av { width:120px; height:120px; }
+  #call .v .ini { width:120px; height:120px; border-radius:50%; background:#7b5cff; display:flex; align-items:center; justify-content:center; font-size:52px; font-weight:700; }
+  #call .v .nm { position:absolute; left:14px; bottom:12px; font-size:18px; color:#e8eaed; }
+  #call .ctl { grid-column:1 / span 2; display:flex; justify-content:center; gap:18px; height:64px; align-items:center; }
+  #call .ctl i { width:52px; height:52px; border-radius:50%; background:#3c4043; display:block; }
+  #call .ctl i.end { background:#ea4335; width:72px; border-radius:26px; }
+  #plan { left:1080px; top:300px; width:600px; padding:44px 50px; }
+  #plan .k { font-size:22px; margin-bottom:18px; }
+  #plan .t { font-size:62px; font-weight:700; }
+  #plan .s { font-size:30px; color:var(--soft); margin-top:12px; }
+  #strike { position:absolute; left:20px; right:20px; top:50%; height:7px; background:var(--red); border-radius:4px; transform-origin:left; box-shadow:0 0 24px rgba(255,45,85,.6); }
+
+  /* D: title */
+  #ttl { left:0; right:0; top:300px; text-align:center; }
+  #ttl .w { display:inline-block; margin:0 14px; }
+  #ttl .row { font-weight:700; font-size:150px; letter-spacing:-.04em; line-height:1.02; }
+  #chips { left:0; right:0; top:690px; display:flex; justify-content:center; gap:26px; }
+  #chips .pill { font-size:34px; padding:16px 30px; }
+</style>
+
+<div class="clip" id="sA" data-start="0" data-duration="3.75" data-track-index="2">
+  <div class="win" id="up">
+    <div class="hd"><div class="yt"><svg width="18" height="18" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></div>Upload short</div>
+    <div class="bd">
+      <div class="ph"><div class="avatar"></div><div class="dl">Day <b>01</b></div></div>
+      <div class="meta">
+        <div class="lab">Title (required)</div><div class="fld">Day 1 · building in public</div>
+        <div class="lab">Visibility</div><div class="fld">Public</div>
+        <div class="bar"><i id="upbar"></i></div><div class="st" id="upst">Uploading… </div>
+      </div>
+    </div>
+    <div id="pub">Publish</div><div id="pubok">✓ Published</div>
+  </div>
+</div>
+
+<div class="clip" id="sB" data-start="3.70" data-duration="5.55" data-track-index="2">
+  <div class="abs" id="cal">
+    <div class="d"><span class="w">MON</span><span class="c"><svg width="34" height="34" viewBox="0 0 40 40"><path d="M9 21 L17 29 L32 12" fill="none" stroke="#0AF0F0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <div class="d"><span class="w">TUE</span><span class="c"><svg width="34" height="34" viewBox="0 0 40 40"><path d="M9 21 L17 29 L32 12" fill="none" stroke="#0AF0F0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <div class="d"><span class="w">WED</span><span class="c"><svg width="34" height="34" viewBox="0 0 40 40"><path d="M9 21 L17 29 L32 12" fill="none" stroke="#0AF0F0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <div class="d"><span class="w">THU</span><span class="c"><svg width="34" height="34" viewBox="0 0 40 40"><path d="M9 21 L17 29 L32 12" fill="none" stroke="#0AF0F0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <div class="d"><span class="w">FRI</span><span class="c"><svg width="34" height="34" viewBox="0 0 40 40"><path d="M9 21 L17 29 L32 12" fill="none" stroke="#0AF0F0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <div class="d"><span class="w">SAT</span><span class="c"><svg width="34" height="34" viewBox="0 0 40 40"><path d="M9 21 L17 29 L32 12" fill="none" stroke="#0AF0F0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <div class="d" id="sun"><span class="w">SUN</span><span class="c" style="border-style:dashed"></span></div>
+  </div>
+  <div class="abs" id="plats">
+    <div class="tile" style="background:#000;border:2px solid #333;font-size:70px">𝕏</div>
+    <div class="tile" style="background:#FF0033"><svg width="64" height="64" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></div>
+    <div class="tile" style="background:#0A66C2;font-size:70px">in</div>
+    <div class="tile" style="background:#FF4500;font-size:60px">r/</div>
+    <div class="tile" style="background:#1877F2;font-size:84px">f</div>
+  </div>
+</div>
+
+<div class="clip" id="sC" data-start="9.15" data-duration="4.40" data-track-index="2">
+  <div class="win" id="call">
+    <div class="v"><div class="avatar av"></div><span class="nm">Dev Vora</span></div>
+    <div class="v"><div class="ini">C</div><span class="nm">Client</span></div>
+    <div class="ctl"><i></i><i></i><i class="end"></i><i></i></div>
+  </div>
+  <div class="card abs" id="plan"><div class="k mono cy">The original plan</div><div class="t">Plan A</div><div class="s">one short, every single day</div><div id="strike"></div></div>
+</div>
+
+<div class="clip" id="sD" data-start="13.45" data-duration="6.68" data-track-index="2">
+  <div class="abs" id="ttl"><div class="row"><span class="w">My</span><span class="w">First</span><span class="w cy">Week</span></div><div class="row"><span class="w">on</span><span class="w">YouTube</span></div></div>
+  <div class="abs" id="chips"><span class="pill"><span class="gd">✓</span> What worked</span><span class="pill"><span class="rd">✕</span> What didn't</span><span class="pill"><span class="cy">→</span> What's next</span></div>
+</div>
+
+<script>
+const K = FW({ id: 'ch0', chapter: 0, duration: DUR, palette: ['#03061a', '#1238c8', '#0a9fc0', '#2b1aa0'] });
+const { tl, IN, INS, OUT, DRAW } = K;
+
+// A · upload (0 - 3.7)
+tl.fromTo('#up', { opacity: 0, y: 60, scale: .96 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'power3.out' }, 0.05);
+tl.fromTo('#upbar', { scaleX: 0 }, { scaleX: 1, duration: 1.9, ease: 'power2.inOut' }, 0.9);
+tl.set('#upst', { textContent: 'Upload complete' }, 2.8);
+tl.fromTo('#pubok', { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: .5, ease: 'power3.out' }, 2.95);
+tl.to('#pub', { opacity: 0, duration: .2 }, 2.95);
+OUT('#up', 3.35);
+
+// B · every day + five platforms (3.7 - 9.2)
+INS('#cal .d', 3.8, { y: 50 }, 0.07);
+tl.to('#cal .d .c svg', { opacity: 1, duration: .25, stagger: .2, ease: 'power2.out' }, 5.2);
+tl.to('#cal .d:not(#sun) .c', { borderColor: '#0AF0F0', backgroundColor: 'rgba(10,240,240,.12)', duration: .25, stagger: .2 }, 5.2);
+tl.to('#sun', { opacity: .45, duration: .4 }, 6.6);
+INS('#plats .tile', 7.55, { y: 60, scale: .8 }, 0.1, 0.55);
+OUT('#cal, #plats', 8.85);
+
+// C · clients + plan A crossed out (9.2 - 13.5)
+tl.fromTo('#call', { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: .7, ease: 'power3.out' }, 9.2);
+IN('#plan', 10.3, { x: 80 });
+tl.fromTo('#strike', { scaleX: 0 }, { scaleX: 1, duration: .5, ease: 'power3.inOut' }, 11.0);
+tl.to('#plan', { opacity: .55, duration: .4 }, 11.5);
+OUT('#call, #plan', 13.1);
+
+// D · title + what worked / didn't / next (13.5 - 20.1)
+K.BG(13.4, ['#020a1e', '#0f5fd8', '#0AF0F0', '#3a1ab0']);
+const TW = ['#ttl .row:nth-child(1) .w:nth-child(1)', '#ttl .row:nth-child(1) .w:nth-child(2)', '#ttl .row:nth-child(1) .w:nth-child(3)', '#ttl .row:nth-child(2) .w:nth-child(1)', '#ttl .row:nth-child(2) .w:nth-child(2)'];
+[14.2, 14.45, 14.75, 15.05, 15.25].forEach((t, i) => tl.fromTo(TW[i], { opacity: 0, y: 70, filter: 'blur(14px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: .7, ease: 'power3.out' }, t));
+tl.fromTo('#ttl', { scale: 1 }, { scale: .9, y: -40, duration: 1.2, ease: 'power2.inOut' }, 15.9);
+[16.05, 16.95, 17.85].forEach((t, i) => IN(`#chips .pill:nth-child(${i + 1})`, t, { y: 30 }));
+K.NAVIN(18.9);
+OUT('#ttl, #chips', 19.55);
+
+K.SUBS(SUBS);
+K.done();
+</script>

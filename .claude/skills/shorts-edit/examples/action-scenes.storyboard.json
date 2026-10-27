@@ -1,0 +1,16 @@
+{
+  "id": "actions", "duration": 26,
+  "world": {"theme": "aurora", "chrome": {"left": "Day 07", "right": "$0 → *$1K MRR*"}},
+  "beats": [
+    {"type": "slots", "id": "sl", "kicker": "The system", "title": "Three pieces", "in": 0.2, "out": 4.6,
+     "items": [{"title": "A spec", "sub": "what good looks like", "at": 1.4}, {"title": "Tests", "at": 2.4}, {"title": "An *agent*", "at": 3.4}]},
+    {"type": "versus", "id": "vs", "title": "Weekly reports", "in": 4.6, "out": 9.0, "winner": "right", "verdict": 7.4,
+     "left": {"label": "By hand", "title": "Copy, paste, format", "value": "10 h", "at": 5.2},
+     "right": {"label": "Automated", "title": "One n8n flow", "value": "30 min", "at": 6.2}},
+    {"type": "stamp", "id": "sm", "kicker": "This week", "title": "Mobile app on the *App Store*", "sub": "iOS and Android", "stamp": "Shipped", "tone": "good", "in": 9.0, "out": 12.6, "at": 10.6},
+    {"type": "strike", "id": "sk", "kicker": "The mistake", "old": ["Build more", "features"], "new": ["Talk to", "*users*"], "in": 12.6, "out": 16.6, "at": 13.9, "new_at": 14.6},
+    {"type": "receipt", "id": "rc", "kicker": "Monthly cost", "title": "Stack", "in": 16.6, "out": 21.4, "total_at": 19.8,
+     "rows": [{"label": "Hosting", "value": 20, "at": 17.4}, {"label": "Database", "value": 25, "at": 18.0}, {"label": "Domain", "value": 1, "at": 18.6}, {"label": "Email", "value": 0, "text": "free", "at": 19.1}]},
+    {"type": "gauge", "id": "ga", "kicker": "Lighthouse", "value": 96, "from": 41, "max": 100, "label": "performance *score*", "in": 21.4, "out": 26, "at": 22.2}
+  ]
+}

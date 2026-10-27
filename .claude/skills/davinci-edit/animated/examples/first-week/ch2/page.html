@@ -1,0 +1,270 @@
+<style>
+  /* A: algorithm test */
+  #crowd { left:640px; top:290px; width:1160px; height:540px; display:grid; grid-template-columns:repeat(29, 1fr); gap:12px; align-content:center; }
+  #crowd i { width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.12); display:block; }
+  #shortc { left:180px; top:250px; width:300px; height:533px; border-radius:24px; background:linear-gradient(160deg,#2b1240,#100818); border:1px solid rgba(255,255,255,.14); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  #shortc .avatar { width:110px; height:110px; } #shortc .t { font-size:30px; font-weight:700; } #shortc .yt { width:56px; height:56px; border-radius:16px; background:#FF0033; display:flex; align-items:center; justify-content:center; }
+  #tq { left:640px; top:170px; }
+
+  /* B: two signals */
+  #phone { left:300px; top:170px; width:380px; height:740px; border-radius:46px; background:#000; border:10px solid #1c1c1f; overflow:hidden; box-shadow:0 40px 100px rgba(0,0,0,.7); }
+  #feed { position:absolute; left:0; right:0; top:0; }
+  #feed .fs { height:720px; position:relative; display:flex; align-items:center; justify-content:center; font-size:44px; font-weight:700; }
+  #feed .fs .ac { position:absolute; right:16px; bottom:120px; display:flex; flex-direction:column; gap:26px; }
+  #feed .fs .ac i { width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.18); display:block; }
+  #hand { left:440px; top:640px; width:90px; height:90px; border-radius:50%; background:rgba(255,255,255,.85); box-shadow:0 0 0 14px rgba(255,255,255,.18); }
+  .sig { position:absolute; left:820px; width:820px; padding:38px 44px; }
+  .sig .k { font-size:22px; margin-bottom:14px; } .sig .t { font-size:44px; font-weight:700; margin-bottom:26px; }
+  .sig .bar { height:26px; border-radius:13px; background:rgba(255,255,255,.08); overflow:hidden; }
+  .sig .bar i { display:block; height:100%; width:100%; transform-origin:left; border-radius:13px; }
+
+  /* C: rushed days */
+  #rush { left:0; right:0; top:260px; display:flex; justify-content:center; gap:22px; }
+  #rush .sc { width:200px; height:356px; border-radius:18px; position:relative; background:#111 center/cover; border:1px solid rgba(255,255,255,.12); overflow:hidden; }
+  #rush .sc.gen { background:linear-gradient(160deg,#2a0d3a,#0e0716); display:flex; align-items:center; justify-content:center; }
+  #rush .sc.gen .avatar { width:86px; height:86px; }
+  #rush .st { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) rotate(-12deg); color:#FF4D6A; background:rgba(10,0,10,.55); font-size:30px; }
+  #why { left:0; right:0; top:680px; display:flex; justify-content:center; gap:22px; }
+  #flame { left:1560px; top:150px; font-size:90px; }
+  #flame small { font-family:"Geist Mono"; font-size:22px; letter-spacing:.14em; color:var(--soft); display:block; text-align:center; }
+
+  /* D: slam */
+  #slam { font-weight:700; font-size:170px; letter-spacing:-.045em; line-height:1; display:flex; align-items:center; gap:40px; }
+  #slam .gt { color:var(--mg); }
+
+  /* E: search */
+  #yts { left:260px; top:160px; width:1400px; height:760px; background:#0f0f0f; }
+  #yts .tb { height:76px; display:flex; align-items:center; gap:24px; padding:0 30px; }
+  #yts .lg { display:flex; align-items:center; gap:8px; font-weight:700; font-size:26px; letter-spacing:-.04em; }
+  #yts .lg i { width:40px; height:28px; border-radius:8px; background:#FF0033; display:block; }
+  #yts .q { flex:none; width:720px; height:48px; border:1px solid #303030; border-radius:24px; background:#121212; display:flex; align-items:center; padding:0 22px; font-size:22px; color:#f1f1f1; margin-left:120px; }
+  #yts .res { position:absolute; left:40px; right:40px; top:120px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .rv .th { height:180px; border-radius:12px; position:relative; }
+  .rv .l1 { height:18px; border-radius:6px; background:#3a3a3a; margin-top:16px; width:90%; }
+  .rv .l2 { height:14px; border-radius:6px; background:#272727; margin-top:10px; width:60%; }
+  #outl { position:absolute; left:14px; top:14px; padding:8px 16px; border-radius:10px; background:var(--am); color:#1a1000; font-weight:700; font-size:20px; letter-spacing:.06em; }
+  #viewsup { position:absolute; right:14px; bottom:14px; padding:6px 12px; border-radius:8px; background:rgba(0,0,0,.75); font-size:18px; color:var(--good); font-weight:700; }
+
+  /* F: script */
+  #doc { left:300px; top:200px; width:640px; height:700px; padding:50px; }
+  #doc .ln2 { height:20px; border-radius:10px; background:rgba(255,255,255,.2); margin:22px 0; transform-origin:left; }
+  #rules { left:1060px; top:300px; display:flex; flex-direction:column; gap:26px; }
+  #rules .pill { font-size:40px; padding:20px 34px; }
+
+  /* G: hooks */
+  #hooks { left:0; right:0; top:330px; height:420px; }
+  .hk { position:absolute; left:50%; top:0; width:440px; height:300px; margin-left:-220px; padding:34px; transform-origin:50% 120%; }
+  .hk .no { font-family:"Geist Mono"; font-size:24px; color:var(--mg); letter-spacing:.14em; }
+  .hk .l { height:18px; border-radius:9px; background:rgba(255,255,255,.22); margin-top:24px; }
+  #best { left:0; right:0; top:760px; text-align:center; }
+
+  /* H: rebalanced */
+  #rb { left:220px; right:220px; top:430px; height:110px; display:flex; gap:8px; }
+  #rb .sg { height:100%; border-radius:16px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:30px; overflow:hidden; white-space:nowrap; }
+  #rbk { left:220px; top:330px; }
+
+  /* I: week plan */
+  #week { left:210px; top:300px; display:grid; grid-template-columns:repeat(7, 200px); gap:16px; }
+  #week .d { height:380px; border-radius:22px; background:rgba(255,255,255,.04); border:1px solid var(--line); position:relative; }
+  #week .d .w { position:absolute; left:0; right:0; top:18px; text-align:center; font-family:"Geist Mono"; font-size:20px; letter-spacing:.2em; color:var(--soft); }
+  .ev { position:absolute; left:14px; right:14px; border-radius:14px; padding:16px; font-size:24px; font-weight:700; }
+  .ev.s { top:90px; height:110px; background:rgba(224,64,251,.22); border:1px solid rgba(224,64,251,.6); }
+  .ev.l { top:220px; height:140px; background:rgba(10,240,240,.18); border:1px solid rgba(10,240,240,.6); }
+
+  /* J: thinking + new curve */
+  #lp { left:0; right:0; top:190px; text-align:center; }
+  #goal { left:300px; top:330px; width:1320px; height:560px; padding:36px 46px; }
+</style>
+
+<div class="clip" id="sT" data-start="0" data-duration="2.85" data-track-index="2">
+  <div class="tcard" id="tc"><div class="k">CHAPTER 02</div><div class="box"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i><div class="tt">Quality Over Quantity</div></div></div>
+</div>
+
+<div class="clip" id="sA" data-start="2.75" data-duration="10.80" data-track-index="2">
+  <div class="h3 abs" id="tq">How YouTube <span class="mg">tests</span> a short</div>
+  <div class="abs" id="shortc"><div class="avatar"></div><div class="t">New short</div><div class="yt"><svg width="26" height="26" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></div></div>
+  <div class="abs" id="crowd"></div>
+</div>
+
+<div class="clip" id="sB" data-start="13.45" data-duration="7.40" data-track-index="2">
+  <div class="abs" id="phone"><div id="feed"><div class="fs" style="background:linear-gradient(160deg,#3a1450,#120818)">Short #1<div class="ac"><i></i><i></i><i></i></div></div><div class="fs" style="background:linear-gradient(160deg,#103048,#081018)">Short #2<div class="ac"><i></i><i></i><i></i></div></div></div></div>
+  <div class="abs" id="hand"></div>
+  <div class="card sig" id="sg1" style="top:250px"><div class="k mono" style="color:var(--soft)">Signal 01</div><div class="t">Watched <span style="color:var(--soft);font-weight:500">vs.</span> swiped away</div><div class="bar"><i style="background:linear-gradient(90deg,#e040fb,#7a5cff)"></i></div></div>
+  <div class="card sig" id="sg2" style="top:560px"><div class="k mono" style="color:var(--soft)">Signal 02</div><div class="t">How long they stayed</div><div class="bar"><i style="background:linear-gradient(90deg,#0AF0F0,#2b4bff)"></i></div></div>
+</div>
+
+<div class="clip" id="sC" data-start="20.70" data-duration="10.55" data-track-index="2">
+  <div class="h3 abs" id="ch" style="left:0;right:0;top:160px;text-align:center">Posting <span class="mg">every day</span></div>
+  <div class="abs" id="rush">
+    <div class="sc gen"><div class="avatar"></div><span class="stamp st">RUSHED</span></div>
+    <div class="sc" style="background-image:url(img/thumb1.png)"><span class="stamp st">RUSHED</span></div>
+    <div class="sc" style="background-image:url(img/thumb2.png)"><span class="stamp st">RUSHED</span></div>
+    <div class="sc" style="background-image:url(img/thumb3.png)"><span class="stamp st">RUSHED</span></div>
+    <div class="sc" style="background-image:url(img/thumb4.png)"><span class="stamp st">RUSHED</span></div>
+    <div class="sc gen"><div class="avatar"></div><span class="stamp st">RUSHED</span></div>
+  </div>
+  <div class="abs" id="why"><span class="pill">📝 Scripts: rushed</span><span class="pill">🪝 Hooks: weak</span><span class="pill">🔥 Posting for the streak</span></div>
+</div>
+
+<div class="clip" id="sD" data-start="31.15" data-duration="5.20" data-track-index="2">
+  <div class="center"><div id="slam"><span id="q1">QUALITY</span><span class="gt" id="q2">&gt;</span><span id="q3" style="color:rgba(255,255,255,.35)">QUANTITY</span></div>
+    <div class="body" id="fewer" style="margin-top:40px">Fewer videos. <span class="mg">Each one properly made.</span></div></div>
+</div>
+
+<div class="clip" id="sE" data-start="36.25" data-duration="9.25" data-track-index="2">
+  <div class="mono abs" id="stepE" style="left:260px;top:110px;font-size:24px;color:var(--mg)">Step 01 · Research</div>
+  <div class="win" id="yts">
+    <div class="tb"><div class="lg"><i></i>YouTube</div><div class="q"><span id="qt"></span></div></div>
+    <div class="res">
+      <div class="rv"><div class="th" style="background:linear-gradient(135deg,#3b2a6b,#1a1430)"></div><div class="l1"></div><div class="l2"></div></div>
+      <div class="rv" id="hit"><div class="th" style="background:linear-gradient(135deg,#6b2a5a,#2a1030)"><span id="outl">OUTLIER</span><span id="viewsup">▲ views</span></div><div class="l1"></div><div class="l2"></div></div>
+      <div class="rv"><div class="th" style="background:linear-gradient(135deg,#2a4b6b,#101e30)"></div><div class="l1"></div><div class="l2"></div></div>
+      <div class="rv"><div class="th" style="background:linear-gradient(135deg,#2a6b55,#103024)"></div><div class="l1"></div><div class="l2"></div></div>
+      <div class="rv"><div class="th" style="background:linear-gradient(135deg,#5a4b2a,#2a2010)"></div><div class="l1"></div><div class="l2"></div></div>
+      <div class="rv"><div class="th" style="background:linear-gradient(135deg,#2a2a6b,#101030)"></div><div class="l1"></div><div class="l2"></div></div>
+      <div class="rv"><div class="th" style="background:linear-gradient(135deg,#6b3a2a,#301810)"></div><div class="l1"></div><div class="l2"></div></div>
+      <div class="rv"><div class="th" style="background:linear-gradient(135deg,#3a6b2a,#183010)"></div><div class="l1"></div><div class="l2"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="clip" id="sF" data-start="45.45" data-duration="5.55" data-track-index="2">
+  <div class="mono abs" style="left:300px;top:130px;font-size:24px;color:var(--mg)" id="stepF">Step 02 · Script</div>
+  <div class="card abs" id="doc"><div class="mono" style="font-size:20px;color:var(--soft)">script.md</div>
+    <div class="ln2" style="width:80%"></div><div class="ln2" style="width:95%"></div><div class="ln2" style="width:70%"></div><div class="ln2" style="width:88%"></div><div class="ln2" style="width:60%"></div><div class="ln2" style="width:92%"></div><div class="ln2" style="width:75%"></div><div class="ln2" style="width:50%"></div></div>
+  <div class="abs" id="rules"><span class="pill">📖 A clear story</span><span class="pill">✏️ Simple words</span><span class="pill">🎯 One point per video</span></div>
+</div>
+
+<div class="clip" id="sG" data-start="50.95" data-duration="5.25" data-track-index="2">
+  <div class="mono abs" style="left:0;right:0;top:200px;text-align:center;font-size:24px;color:var(--mg)" id="stepG">Step 03 · Hook</div>
+  <div class="abs" id="hooks">
+    <div class="card hk" id="h1"><div class="no">HOOK 01</div><div class="l" style="width:90%"></div><div class="l" style="width:70%"></div><div class="l" style="width:55%"></div></div>
+    <div class="card hk" id="h2"><div class="no">HOOK 02</div><div class="l" style="width:85%"></div><div class="l" style="width:75%"></div><div class="l" style="width:40%"></div></div>
+    <div class="card hk" id="h3"><div class="no">HOOK 03</div><div class="l" style="width:95%"></div><div class="l" style="width:65%"></div><div class="l" style="width:50%"></div></div>
+  </div>
+  <div class="h3 abs" id="best">Pick the <span class="mg">strongest</span></div>
+</div>
+
+<div class="clip" id="sH" data-start="56.10" data-duration="3.05" data-track-index="2">
+  <div class="mono abs" id="rbk" style="font-size:24px;color:var(--soft)">Where the time goes now</div>
+  <div class="abs" id="rb">
+    <div class="sg" style="background:#5a1a8a;flex:1">Research</div><div class="sg" style="background:#7a1aa8;flex:1">Script</div><div class="sg" style="background:#a01ab8;flex:1">Hook</div>
+    <div class="sg" style="background:rgba(255,255,255,.12);flex:1">Record</div><div class="sg" style="background:rgba(255,255,255,.08);flex:1">Edit</div></div>
+</div>
+
+<div class="clip" id="sI" data-start="59.10" data-duration="5.70" data-track-index="2">
+  <div class="h3 abs" id="ih" style="left:210px;top:180px">The <span class="mg">new plan</span></div>
+  <div class="abs" id="week">
+    <div class="d"><span class="w">MON</span><div class="ev s">Short</div></div><div class="d"><span class="w">TUE</span></div>
+    <div class="d"><span class="w">WED</span><div class="ev s">Short</div></div><div class="d"><span class="w">THU</span></div>
+    <div class="d"><span class="w">FRI</span><div class="ev s" style="opacity:.55;border-style:dashed">Short?</div></div><div class="d"><span class="w">SAT</span></div>
+    <div class="d"><span class="w">SUN</span><div class="ev l">Long video</div></div>
+  </div>
+</div>
+
+<div class="clip" id="sJ" data-start="64.70" data-duration="7.20" data-track-index="2">
+  <div class="h2 abs" id="lp"><span id="lp1">Less posting.</span> <span class="mg" id="lp2">More thinking.</span></div>
+  <div class="card abs" id="goal"><div style="font-size:28px;font-weight:700">Audience retention <span style="color:var(--soft);font-weight:500">· the goal for next week</span></div>
+    <svg width="1220" height="420" fill="none" style="position:absolute;left:46px;top:110px"><path d="M0 400H1220 M0 290H1220 M0 180H1220 M0 70H1220" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+      <path id="oldl" d="M0 30 C 90 40, 160 220, 260 280 S 640 330, 820 342 S 1100 360, 1220 370" stroke="rgba(255,77,106,.45)" stroke-width="5"/>
+      <path id="newl" d="M0 30 C 120 34, 260 80, 420 104 S 820 140, 1000 150 S 1160 160, 1220 164" stroke="#e040fb" stroke-width="7"/>
+      <path id="gl" d="M0 120H1220" stroke="#0AF0F0" stroke-width="3" stroke-dasharray="14 12"/></svg>
+    <span class="pill" id="nw" style="position:absolute;right:46px;top:28px;font-size:24px;border-color:var(--cy);color:var(--cy)">next week →</span></div>
+</div>
+
+<script>
+const K = FW({ id: 'ch2', chapter: 2, duration: DUR, palette: ['#0d0418', '#6512aa', '#e040fb', '#2e1ab0'], doneAt: DUR - 0.8 });
+const { tl, IN, INS, OUT, DRAW, TYPE } = K;
+K.TITLE('tc', 0.05, 2.75);
+
+// A · YouTube tests the short (2.8 - 13.5)
+IN('#tq', 2.85);
+IN('#shortc', 4.3, { x: -60 });
+const crowd = document.getElementById('crowd'); for (let i = 0; i < 29 * 17; i++) crowd.insertAdjacentHTML('beforeend', '<i></i>');
+tl.fromTo('#crowd i', { opacity: 0, scale: .3 }, { opacity: 1, scale: 1, duration: .5, ease: 'power2.out', stagger: { each: .0016, from: 'center' } }, 5.6);
+// small group (100), then more (300), then many
+const ring = (n, at, col) => tl.to(`#crowd i:nth-child(-n+${n})`, { backgroundColor: col, duration: .35, stagger: { each: .5 / n, from: 'start' } }, at);
+ring(58, 9.7, '#e040fb');
+tl.to('#crowd i:nth-child(-n+58)', { backgroundColor: '#0AF0F0', duration: .3 }, 11.3);
+ring(174, 12.15, '#0AF0F0'); ring(493, 12.75, '#0AF0F0');
+OUT('#tq, #shortc, #crowd', 13.2);
+
+// B · the two signals (13.5 - 20.7)
+K.BG(13.4, ['#0b0418', '#5512b0', '#b040fb', '#1a3ab0']);
+IN('#phone', 13.5, { x: -60 });
+IN('#sg1', 15.7, { x: 60 }); tl.fromTo('#sg1 .bar i', { scaleX: 0 }, { scaleX: .7, duration: 1.2, ease: 'power2.out' }, 16.4);
+tl.fromTo('#hand', { opacity: 0, y: 0 }, { opacity: 1, duration: .2 }, 17.7);
+tl.to('#hand', { y: -330, duration: .6, ease: 'power2.inOut' }, 17.9); tl.to('#feed', { y: -720, duration: .6, ease: 'power2.inOut' }, 18.0);
+tl.to('#hand', { opacity: 0, duration: .2 }, 18.5);
+IN('#sg2', 19.05, { x: 60 }); tl.fromTo('#sg2 .bar i', { scaleX: 0 }, { scaleX: .45, duration: 1.0, ease: 'power2.out' }, 19.6);
+OUT('#phone, #sg1, #sg2', 20.45);
+
+// C · rushed days (20.7 - 31.2)
+IN('#ch', 20.75);
+tl.fromTo('#rush .sc', { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out', stagger: .1 }, 21.4);
+tl.fromTo('#rush .st', { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: .28, ease: 'power3.in', stagger: .22 }, 25.2);
+[25.1, 26.75, 29.0].forEach((t, i) => IN(`#why .pill:nth-child(${i + 1})`, t, { y: 30 }));
+tl.to('#rush .sc', { filter: 'saturate(.3) brightness(.7)', duration: .8 }, 29.8);
+OUT('#ch, #rush, #why', 30.9);
+
+// D · slam (31.2 - 36.3)
+K.BG(31.1, ['#12041e', '#8a12c8', '#ff40c8', '#4a1ab8'], .8);
+tl.fromTo('#q1', { opacity: 0, x: -120, filter: 'blur(14px)' }, { opacity: 1, x: 0, filter: 'blur(0px)', duration: .6, ease: 'power3.out' }, 32.1);
+tl.fromTo('#q2', { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .5, ease: 'power3.out' }, 32.4);
+tl.fromTo('#q3', { opacity: 0, x: 120, filter: 'blur(14px)' }, { opacity: 1, x: 0, filter: 'blur(0px)', duration: .6, ease: 'power3.out' }, 32.6);
+IN('#fewer', 33.1, { y: 24 });
+OUT('#slam, #fewer', 35.95);
+
+// E · research (36.3 - 45.5)
+K.BG(36.2, ['#0b0418', '#5a14a8', '#e040fb', '#1a2ab0']);
+IN('#stepE', 36.35, { x: -30 });
+tl.fromTo('#yts', { opacity: 0, y: 80, scale: .96 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'power3.out' }, 36.6);
+TYPE('#qt', 37.6, 'build in public · freelance developer', 1.6);
+tl.fromTo('#yts .rv', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out', stagger: .08 }, 39.4);
+tl.fromTo('#outl', { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: .35, ease: 'power3.in' }, 41.5);
+tl.fromTo('#viewsup', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .4, ease: 'power3.out' }, 41.8);
+tl.to('#yts .rv:not(#hit)', { opacity: .3, duration: .5 }, 42.2);
+tl.to('#hit', { scale: 1.08, duration: .6, ease: 'power3.out' }, 42.2);
+OUT('#stepE, #yts', 45.15);
+
+// F · script (45.5 - 51)
+IN('#stepF', 45.55, { x: -30 }); IN('#doc', 45.7, { x: -50 });
+tl.fromTo('#doc .ln2', { scaleX: 0 }, { scaleX: 1, duration: .45, ease: 'power3.out', stagger: .25 }, 46.2);
+[46.85, 47.85, 48.95].forEach((t, i) => IN(`#rules .pill:nth-child(${i + 1})`, t, { x: 50 }));
+OUT('#stepF, #doc, #rules', 50.7);
+
+// G · three hooks (51 - 56.2)
+IN('#stepG', 51.05, { y: 20 });
+tl.fromTo('#h1', { opacity: 0, rotation: 0, x: 0 }, { opacity: 1, rotation: -12, x: -380, duration: .7, ease: 'power3.out' }, 52.75);
+tl.fromTo('#h2', { opacity: 0, rotation: 0 }, { opacity: 1, rotation: 0, duration: .7, ease: 'power3.out' }, 52.85);
+tl.fromTo('#h3', { opacity: 0, rotation: 0, x: 0 }, { opacity: 1, rotation: 12, x: 380, duration: .7, ease: 'power3.out' }, 52.95);
+tl.to('#h1, #h3', { opacity: .2, filter: 'blur(3px)', duration: .5 }, 55.0);
+tl.to('#h2', { y: -40, scale: 1.08, borderColor: 'rgba(224,64,251,.9)', boxShadow: '0 0 60px rgba(224,64,251,.45)', duration: .6, ease: 'power3.out' }, 55.05);
+IN('#best', 55.15, { y: 24 });
+OUT('#stepG, #hooks, #best', 55.9);
+
+// H · time rebalanced (56.2 - 59.1)
+IN('#rbk', 56.2, { y: 20 });
+tl.fromTo('#rb', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, 56.25);
+tl.to('#rb .sg:nth-child(-n+3)', { flexGrow: 2.2, duration: 1.2, ease: 'power2.inOut' }, 57.0);
+OUT('#rbk, #rb', 58.85);
+
+// I · new weekly plan (59.2 - 64.7)
+IN('#ih', 59.2);
+tl.fromTo('#week .d', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .5, ease: 'power3.out', stagger: .06 }, 59.6);
+tl.fromTo('#week .ev.s', { opacity: 0, scale: .8 }, { opacity: (i) => i === 2 ? .55 : 1, scale: 1, duration: .5, ease: 'power3.out', stagger: .2 }, 60.6);
+tl.fromTo('#week .ev.l', { opacity: 0, scale: .8 }, { opacity: 1, scale: 1, duration: .55, ease: 'power3.out' }, 62.8);
+OUT('#ih, #week', 64.4);
+
+// J · less posting, more thinking + new goal curve (64.8 - 71.9)
+tl.fromTo('#lp1', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .55, ease: 'power3.out' }, 64.75);
+tl.fromTo('#lp2', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .55, ease: 'power3.out' }, 66.0);
+tl.to('#lp', { y: -60, scale: .7, duration: .7, ease: 'power3.inOut' }, 67.0);
+tl.fromTo('#goal', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .7, ease: 'power3.out' }, 67.2);
+DRAW('#oldl', 67.5, .9); tl.fromTo('#gl', { opacity: 0, scaleX: 0, transformOrigin: 'left' }, { opacity: 1, scaleX: 1, duration: .8, ease: 'power2.out' }, 68.0); DRAW('#newl', 68.4, 1.6, 'power2.out');
+IN('#nw', 69.6, { x: 30 });
+OUT('#lp, #goal', 71.45);
+
+K.SUBS(SUBS);
+K.done();
+</script>

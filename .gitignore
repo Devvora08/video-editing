@@ -1,0 +1,18 @@
+# Whitelist: only the skills and their docs are published. Footage, renders,
+# downloaded reference videos and third-party kit files stay local.
+/*
+!/.gitignore
+!/.gitattributes
+!/.github/
+!/LICENSES/
+!/style-study/
+
+/.claude/*
+!/.claude/
+!/.claude/skills/
+
+# Render outputs and caches inside the skills
+.claude/skills/*/renders/
+__pycache__/
+*.pyc
+node_modules/

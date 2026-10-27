@@ -1,0 +1,77 @@
+/* My First Week on YouTube: shared look for every chapter page (1920x1080). */
+@font-face { font-family:"DM Sans"; src:url("fonts/DMSans-400.woff2") format("woff2"); font-weight:400; font-display:block; }
+@font-face { font-family:"DM Sans"; src:url("fonts/DMSans-500.woff2") format("woff2"); font-weight:500; font-display:block; }
+@font-face { font-family:"DM Sans"; src:url("fonts/DMSans-700.woff2") format("woff2"); font-weight:700; font-display:block; }
+@font-face { font-family:"Geist"; src:url("fonts/Geist-wght.woff2") format("woff2"); font-weight:100 900; font-display:block; }
+@font-face { font-family:"Geist Mono"; src:url("fonts/GeistMono-wght.woff2") format("woff2"); font-weight:100 900; font-display:block; }
+
+:root { --cy:#0AF0F0; --bl:#2b4bff; --mg:#E040FB; --am:#FFB904; --red:#FF2D55; --good:#3CF08C; --bad:#FF4D6A;
+        --fg:#FFFFFF; --soft:rgba(255,255,255,.68); --faint:rgba(255,255,255,.34);
+        --glass:rgba(255,255,255,.06); --glass2:rgba(255,255,255,.11); --line:rgba(255,255,255,.16); }
+* { box-sizing:border-box; margin:0; padding:0; }
+html, body { width:100%; height:100%; overflow:hidden; background:#030308; font-family:"DM Sans", sans-serif; color:var(--fg); }
+#stage { position:relative; width:1920px; height:1080px; overflow:hidden; background:#030308; }
+svg { overflow:visible; }
+
+/* ---------- background: dark tinted base, soft glow, two drifting blobs (all colours set per chapter) ---------- */
+#bg { position:absolute; inset:0; background:#05050f; }
+#glow { position:absolute; left:50%; top:48%; width:1800px; height:1300px; margin:-650px 0 0 -900px; border-radius:50%;
+        background:radial-gradient(closest-side, var(--gc, #1b23ff) 0%, rgba(0,0,0,0) 100%); opacity:.42; }
+.blob { position:absolute; border-radius:50%; filter:blur(120px); opacity:.30; }
+#b1 { width:700px; height:700px; left:-160px; top:-200px; background:#0AF0F0; }
+#b2 { width:640px; height:640px; right:-180px; bottom:-220px; background:#E040FB; }
+#vig { position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.62) 100%); }
+#grain { position:absolute; inset:-50%; opacity:.05; background-image:radial-gradient(rgba(255,255,255,.9) 1px, transparent 1px); background-size:3px 3px; }
+
+/* ---------- navbar: chapter pills, each with its own progress line ---------- */
+#nav { position:absolute; left:0; right:0; top:34px; display:flex; justify-content:center; gap:10px; z-index:50; }
+#nav .p { position:relative; display:flex; align-items:center; gap:10px; padding:11px 20px 13px; border-radius:14px;
+          background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+          font-family:"Geist"; font-weight:500; font-size:19px; letter-spacing:.02em; color:var(--faint); }
+#nav .p .n { font-family:"Geist Mono"; font-size:15px; color:inherit; opacity:.8; }
+#nav .p .ck { width:18px; height:18px; border-radius:50%; background:var(--cy); color:#03131a; font-size:12px; font-weight:700;
+              display:flex; align-items:center; justify-content:center; transform:scale(0); }
+#nav .p .tr { position:absolute; left:14px; right:14px; bottom:5px; height:3px; border-radius:3px; background:rgba(255,255,255,.08); overflow:hidden; }
+#nav .p .fl { position:absolute; inset:0; background:var(--cy); transform-origin:left; transform:scaleX(0); border-radius:3px; }
+#nav .p.on { color:#fff; background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.22); }
+#nav .p.done { color:rgba(255,255,255,.78); }
+
+/* ---------- chapter title card (reference: thin white box, light type, box draws in from its sides) ---------- */
+.tcard { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; z-index:20; }
+.tcard .k { font-family:"Geist Mono"; font-size:22px; letter-spacing:.42em; color:var(--soft); margin-bottom:34px; }
+.tcard .box { position:relative; padding:44px 86px 50px; }
+.tcard .box i { position:absolute; background:#fff; display:block; }
+.tcard .box .t1 { left:0; right:0; top:0; height:2px; transform-origin:left; }
+.tcard .box .t2 { left:0; right:0; bottom:0; height:2px; transform-origin:right; }
+.tcard .box .t3 { top:0; bottom:0; left:0; width:2px; transform-origin:bottom; }
+.tcard .box .t4 { top:0; bottom:0; right:0; width:2px; transform-origin:top; }
+.tcard .tt { font-family:"Geist"; font-weight:300; font-size:104px; letter-spacing:-.01em; line-height:1; white-space:nowrap; }
+
+/* ---------- subtitles: plain white, one line ---------- */
+#sub { position:absolute; left:160px; right:160px; bottom:36px; text-align:center; z-index:60; font-weight:500; font-size:40px;
+       line-height:1.2; color:#fff; text-shadow:0 2px 6px rgba(0,0,0,.9), 0 0 18px rgba(0,0,0,.55); }
+
+/* ---------- shared building blocks ---------- */
+.clip { position:absolute; inset:0; visibility:hidden; }
+.center { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+.abs { position:absolute; }
+.h1 { font-weight:700; font-size:140px; letter-spacing:-.035em; line-height:.95; }
+.h2 { font-weight:700; font-size:92px; letter-spacing:-.03em; line-height:1; }
+.h3 { font-weight:700; font-size:58px; letter-spacing:-.02em; line-height:1.08; }
+.body { font-weight:500; font-size:38px; color:var(--soft); line-height:1.3; }
+.mono { font-family:"Geist Mono"; letter-spacing:.14em; text-transform:uppercase; }
+.thin { font-family:"Geist"; font-weight:300; }
+.cy { color:var(--cy); } .mg { color:var(--mg); } .am { color:var(--am); } .rd { color:var(--red); } .gd { color:var(--good); }
+.card { background:rgba(255,255,255,.055); border:1px solid var(--line); border-radius:26px; backdrop-filter:blur(18px);
+        box-shadow:0 30px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.10); }
+.pill { display:inline-flex; align-items:center; gap:12px; padding:13px 24px; border-radius:999px; background:var(--glass2);
+        border:1px solid var(--line); font-weight:500; font-size:30px; white-space:nowrap; }
+.tile { border-radius:30px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; box-shadow:0 22px 60px rgba(0,0,0,.5); }
+.dot { border-radius:50%; }
+.win { position:absolute; border-radius:18px; overflow:hidden; box-shadow:0 50px 120px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.08); }
+.chrome { height:46px; display:flex; align-items:center; gap:9px; padding:0 18px; background:#202124; }
+.chrome i { width:12px; height:12px; border-radius:50%; background:#5f6368; display:block; }
+.chrome .url { margin-left:18px; flex:1; height:30px; border-radius:15px; background:#2f3033; color:#e8eaed; font-size:17px;
+               display:flex; align-items:center; padding:0 16px; font-family:"DM Sans"; }
+.avatar { border-radius:50%; background:url("img/avatar.png") center/cover; }
+.stamp { padding:10px 22px; border:4px solid currentColor; border-radius:12px; font-weight:700; letter-spacing:.06em; }

@@ -1,0 +1,324 @@
+<style>
+  /* ---------- n8n editor look ---------- */
+  .ed { position:absolute; left:110px; top:128px; width:1700px; height:830px; border-radius:14px; overflow:hidden; background:#1b1b22;
+        box-shadow:0 50px 120px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08); }
+  .ed .cv { position:absolute; left:0; right:0; top:58px; bottom:0; background-color:#1b1b22;
+            background-image:radial-gradient(#34343f 1.4px, transparent 1.4px); background-size:22px 22px; }
+  .ed .hd { position:absolute; left:0; right:0; top:0; height:58px; background:#23232b; border-bottom:1px solid #33333d; display:flex; align-items:center; padding:0 20px; gap:16px; font-size:18px; color:#c8c8d4; z-index:3; }
+  .ed .hd .lg { display:flex; align-items:center; gap:8px; font-weight:700; color:#fff; font-size:20px; }
+  .ed .hd .lg i { width:30px; height:30px; border-radius:8px; background:#ea4b71; display:flex; align-items:center; justify-content:center; font-style:normal; font-size:15px; }
+  .ed .hd .bc { color:#8e8ea0; } .ed .hd .bc b { color:#fff; font-weight:600; }
+  .ed .hd .tb { margin-left:auto; display:flex; gap:4px; background:#1b1b22; border-radius:8px; padding:4px; }
+  .ed .hd .tb span { padding:6px 16px; border-radius:6px; font-size:16px; } .ed .hd .tb span.on { background:#33333d; color:#fff; }
+  .ed .hd .ac { display:flex; align-items:center; gap:10px; margin-left:24px; font-size:16px; }
+  .ed .hd .ac .sw { width:42px; height:24px; border-radius:12px; background:#36c97b; position:relative; } .ed .hd .ac .sw::after { content:""; position:absolute; right:3px; top:3px; width:18px; height:18px; border-radius:50%; background:#fff; }
+  .ed .hd .sv { padding:8px 18px; border-radius:6px; background:#33333d; color:#fff; font-size:16px; }
+  .ed .side { position:absolute; left:0; top:58px; bottom:0; width:58px; background:#23232b; border-right:1px solid #33333d; display:flex; flex-direction:column; align-items:center; gap:18px; padding-top:20px; z-index:2; }
+  .ed .side i { width:24px; height:24px; border-radius:6px; background:#3a3a46; display:block; }
+  .ed .run { position:absolute; left:50%; bottom:26px; transform:translateX(-50%); padding:12px 26px; border-radius:8px; background:#ff6d5a; color:#fff; font-weight:600; font-size:18px; z-index:3; display:flex; align-items:center; gap:10px; }
+  .ed svg.edges { position:absolute; left:0; top:58px; }
+  .nd { position:absolute; width:104px; height:104px; }
+  .nd .bx { position:absolute; inset:0; border-radius:14px; background:#2b2b35; border:2px solid #4c4c5c; display:flex; align-items:center; justify-content:center; }
+  .nd.tr .bx { border-radius:52px 14px 14px 52px; }
+  .nd .lb { position:absolute; left:-60px; right:-60px; top:114px; text-align:center; font-size:17px; font-weight:600; color:#e8e8f0; line-height:1.2; }
+  .nd .sb { display:block; font-size:14px; font-weight:400; color:#8e8ea0; margin-top:3px; }
+  .nd .ok { position:absolute; right:-10px; top:-10px; width:28px; height:28px; border-radius:50%; background:#36c97b; color:#0b1a12; font-size:16px; font-weight:700; display:flex; align-items:center; justify-content:center; transform:scale(0); }
+  .nd .hl, .nd .hr { position:absolute; top:46px; width:12px; height:12px; border-radius:50%; background:#8e8ea0; } .nd .hl { left:-7px; } .nd .hr { right:-7px; }
+  .nd.ai .bx { width:auto; }
+  .ic { width:58px; height:58px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:28px; color:#fff; }
+  .cnt { position:absolute; font-size:14px; color:#36c97b; font-weight:600; opacity:0; }
+  .pkt { position:absolute; width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%; background:#ff6d5a; box-shadow:0 0 14px #ff6d5a; opacity:0; z-index:2; }
+
+  /* A: plan card */
+  #plan { left:560px; top:300px; width:800px; height:420px; padding:50px; }
+  #plan .k { font-size:22px; color:var(--soft); }
+  #plan .t { font-size:56px; font-weight:700; margin:18px 0 26px; }
+  #plan .l { height:18px; border-radius:9px; background:rgba(255,255,255,.14); margin:16px 0; }
+  #fp { position:absolute; right:-30px; bottom:-26px; color:#ff6d5a; background:rgba(20,10,10,.6); font-size:36px; transform:rotate(8deg); }
+
+  /* B: storefront */
+  #store { left:180px; top:200px; width:760px; height:640px; }
+  #store .bld { position:absolute; left:40px; right:40px; top:120px; bottom:0; background:#2a2633; border-radius:10px 10px 0 0; border:2px solid #3e3848; }
+  #store .sign { position:absolute; left:120px; right:120px; top:60px; height:96px; background:#111; border:3px solid #c9a24a; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:2; }
+  #store .sign b { font-family:"Geist"; font-weight:300; font-size:42px; letter-spacing:.14em; color:#f1d48a; } #store .sign small { font-family:"Geist Mono"; font-size:15px; letter-spacing:.3em; color:#c9a24a; }
+  #store .awn { position:absolute; left:20px; right:20px; top:170px; height:70px; background:repeating-linear-gradient(90deg,#c9a24a 0 50px,#1a1a1a 50px 100px); border-radius:0 0 30px 30px; }
+  #store .win1 { position:absolute; left:90px; top:280px; width:330px; height:250px; background:linear-gradient(160deg,#3b4a6a,#1b2238); border:6px solid #3e3848; border-radius:6px; display:flex; align-items:center; justify-content:center; }
+  #store .door { position:absolute; right:90px; top:280px; width:170px; height:360px; background:#1b1b22; border:6px solid #3e3848; border-radius:6px 6px 0 0; }
+  #yrs { left:1060px; top:240px; }
+  #yrs b { font-size:200px; font-weight:700; letter-spacing:-.05em; line-height:1; color:#f1d48a; } #yrs span { display:block; font-size:36px; color:var(--soft); }
+  #manual { left:1060px; top:560px; display:flex; gap:22px; }
+  #manual .card { width:190px; height:190px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; font-size:22px; color:var(--soft); }
+  #manual .card b { font-size:60px; }
+
+  /* G: dashboard */
+  #dash { position:absolute; left:110px; top:128px; width:1700px; height:830px; border-radius:14px; background:#14141b; overflow:hidden; box-shadow:0 50px 120px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08); }
+  #dash .hd { height:64px; display:flex; align-items:center; padding:0 30px; gap:14px; border-bottom:1px solid #2a2a35; font-size:22px; font-weight:600; }
+  #dash .hd i { width:30px; height:30px; border-radius:8px; background:linear-gradient(135deg,#f1d48a,#c9a24a); display:block; }
+  #dash .hd span { margin-left:auto; font-size:16px; color:#8e8ea0; font-weight:400; display:flex; align-items:center; gap:8px; } #dash .hd span::before { content:""; width:8px; height:8px; border-radius:50%; background:#36c97b; }
+  #dash .gr { position:absolute; left:30px; right:30px; top:94px; bottom:30px; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:24px; }
+  .dt { background:#1d1d26; border:1px solid #2a2a35; border-radius:14px; padding:26px 30px; position:relative; overflow:hidden; }
+  .dt .k { font-size:22px; font-weight:600; } .dt .s { font-size:16px; color:#8e8ea0; margin-top:4px; }
+  .dt svg { position:absolute; left:30px; right:30px; bottom:26px; }
+  .bars { position:absolute; left:30px; right:30px; bottom:26px; height:170px; display:flex; align-items:flex-end; gap:14px; }
+  .bars i { flex:1; height:100%; border-radius:6px 6px 0 0; display:block; transform-origin:bottom; }
+
+  /* H: system */
+  #sys { left:0; right:0; top:200px; display:flex; justify-content:center; gap:40px; }
+  #sys .card { width:400px; padding:40px; text-align:center; }
+  #sys .v { font-size:140px; font-weight:700; line-height:1; letter-spacing:-.04em; } #sys .l { font-size:30px; color:var(--soft); margin-top:12px; }
+  #wfg { left:0; right:0; top:620px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; width:1100px; margin:0 auto; }
+  #wfg i { width:56px; height:56px; border-radius:12px; background:#2b2b35; border:2px solid #4c4c5c; display:block; }
+  #wfg i.ag { background:#5b3cff; border-color:#9b8cff; box-shadow:0 0 20px rgba(155,140,255,.6); }
+
+  /* I: closing */
+  #calm { left:0; right:0; top:250px; text-align:center; }
+  #calm .row { font-size:84px; font-weight:700; letter-spacing:-.03em; line-height:1.15; }
+  #bridge { left:610px; top:330px; width:700px; height:400px; padding:44px; display:flex; flex-direction:column; justify-content:center; }
+</style>
+
+<div class="clip" id="sT" data-start="0" data-duration="2.85" data-track-index="2">
+  <div class="tcard" id="tc"><div class="k">CHAPTER 04</div><div class="box"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i><div class="tt">n8n Automation</div></div></div>
+</div>
+
+<div class="clip" id="sA" data-start="2.80" data-duration="6.55" data-track-index="2">
+  <div class="mono abs" id="ak" style="left:560px;top:230px;font-size:24px;color:#ff6d5a">The project I'm most excited about</div>
+  <div class="card abs" id="plan"><div class="k mono">Client project</div><div class="t">AI growth system</div><div class="l" style="width:90%"></div><div class="l" style="width:70%"></div><div class="l" style="width:80%"></div><div class="stamp" id="fp">FINAL PLAN</div></div>
+</div>
+
+<div class="clip" id="sB" data-start="9.30" data-duration="11.85" data-track-index="2">
+  <div class="abs" id="store"><div class="sign"><b>SUN N SHADE</b><small>LUXURY OPTICALS</small></div><div class="bld"></div><div class="awn"></div>
+    <div class="win1"><svg width="220" height="90" viewBox="0 0 220 90" fill="none" stroke="#f1d48a" stroke-width="7"><circle cx="55" cy="50" r="34"/><circle cx="165" cy="50" r="34"/><path d="M89 46 Q110 32 131 46 M21 40 L4 28 M199 40 L216 28"/></svg></div><div class="door"></div></div>
+  <div class="abs" id="yrs"><b id="yn">0</b><span>years running</span></div>
+  <div class="abs" id="manual"><div class="card"><b>📄</b>paperwork</div><div class="card"><b>📞</b>calls</div><div class="card"><b>✉️</b>inbox</div></div>
+</div>
+
+<div class="clip" id="sC" data-start="21.30" data-duration="9.05" data-track-index="2">
+  <div class="ed" id="edC"><div class="hd"><div class="lg"><i>n8n</i></div><span class="bc">Sun N Shade / <b id="wfn"></b></span><div class="tb"><span class="on">Editor</span><span>Executions</span></div><div class="ac">Active <span class="sw"></span></div><span class="sv">Save</span></div>
+    <div class="side"><i></i><i></i><i></i><i></i></div><div class="cv"></div>
+    <div class="abs" id="eng" style="left:650px;top:290px;width:400px;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px">
+      <div style="width:150px;height:150px;border-radius:40px;background:#ea4b71;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:56px;box-shadow:0 0 80px rgba(234,75,113,.6)">n8n</div>
+      <div style="font-size:30px;font-weight:600">central automation engine</div></div>
+  </div>
+  <div class="h3 abs" id="ch" style="left:110px;top:60px;display:none"></div>
+</div>
+
+<div class="clip" id="sD" data-start="30.25" data-duration="14.40" data-track-index="2">
+  <div class="ed" id="edD"><div class="hd"><div class="lg"><i>n8n</i></div><span class="bc">Sun N Shade / <b>Inbox Intelligence</b></span><div class="tb"><span class="on">Editor</span><span>Executions</span></div><div class="ac">Active <span class="sw"></span></div><span class="sv">Save</span></div>
+    <div class="side"><i></i><i></i><i></i><i></i></div><div class="cv" id="cvD"></div><div class="run">▶ Test workflow</div></div>
+</div>
+
+<div class="clip" id="sE" data-start="44.55" data-duration="20.55" data-track-index="2">
+  <div class="ed" id="edE"><div class="hd"><div class="lg"><i>n8n</i></div><span class="bc">Sun N Shade / <b>Website Leads</b></span><div class="tb"><span class="on">Editor</span><span>Executions</span></div><div class="ac">Active <span class="sw"></span></div><span class="sv">Save</span></div>
+    <div class="side"><i></i><i></i><i></i><i></i></div><div class="cv" id="cvE"></div><div class="run">▶ Test workflow</div></div>
+  <!-- product page -->
+  <div class="win" id="prod" style="left:260px;top:220px;width:700px;height:640px;background:#faf8f4;color:#1a1a1a">
+    <div class="chrome" style="background:#e9e6e0"><i></i><i></i><i></i><div class="url" style="background:#fff;color:#333">sunnshade.example/aviator-gold</div></div>
+    <div style="display:flex;gap:26px;padding:30px">
+      <div style="width:300px;height:250px;border-radius:12px;background:linear-gradient(160deg,#f0e6d2,#d8c8a8);display:flex;align-items:center;justify-content:center"><svg width="230" height="90" viewBox="0 0 220 90" fill="none" stroke="#8a6a2a" stroke-width="8"><circle cx="55" cy="50" r="34"/><circle cx="165" cy="50" r="34"/><path d="M89 46 Q110 32 131 46"/></svg></div>
+      <div style="flex:1"><div style="font-size:15px;letter-spacing:.2em;color:#8a6a2a">SUN N SHADE</div><div style="font-size:32px;font-weight:700;margin:8px 0">Aviator · Gold</div><div style="font-size:18px;color:#666">Premium frames</div></div></div>
+    <div style="padding:0 30px"><div style="font-size:20px;font-weight:600;margin-bottom:12px">Enquire about this frame</div>
+      <div id="f1" style="border:1px solid #ccc;border-radius:8px;padding:12px 16px;font-size:18px;color:#333;margin-bottom:10px;height:48px"></div>
+      <div id="f2" style="border:1px solid #ccc;border-radius:8px;padding:12px 16px;font-size:18px;color:#333;margin-bottom:14px;height:48px"></div>
+      <div id="sub2" style="display:inline-block;padding:12px 28px;border-radius:8px;background:#1a1a1a;color:#fff;font-weight:600;font-size:18px">Send inquiry</div></div>
+  </div>
+  <!-- telegram phone -->
+  <div class="abs" id="tg" style="left:1380px;top:180px;width:380px;height:740px;border-radius:44px;background:#0e1621;border:10px solid #1c1c1f;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7)">
+    <div style="height:84px;background:#17212b;display:flex;align-items:center;gap:14px;padding:22px 20px 0;color:#fff;font-size:20px;font-weight:600"><div style="width:44px;height:44px;border-radius:50%;background:#2aabee;display:flex;align-items:center;justify-content:center">🤖</div><div>Sun N Shade Bot<div style="font-size:14px;color:#7a8a99;font-weight:400">bot</div></div></div>
+    <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+      <div id="tg1" style="background:#182533;border-radius:14px;padding:16px;color:#e8edf2;font-size:18px;line-height:1.45">🆕 <b>New lead</b><br>Frame: Aviator · Gold<br>Interest: <span style="color:#f1d48a">premium sunglasses</span><br>Status: <b id="tgs" style="color:#2aabee">New</b></div>
+      <div id="tg2" style="background:#182533;border-radius:14px;padding:16px;color:#e8edf2;font-size:18px">⏰ Reminder: follow up today</div></div></div>
+</div>
+
+<div class="clip" id="sF" data-start="65.05" data-duration="20.30" data-track-index="2">
+  <div class="ed" id="edF"><div class="hd"><div class="lg"><i>n8n</i></div><span class="bc">Sun N Shade / <b>Marketing Agents</b></span><div class="tb"><span class="on">Editor</span><span>Executions</span></div><div class="ac">Active <span class="sw"></span></div><span class="sv">Save</span></div>
+    <div class="side"><i></i><i></i><i></i><i></i></div><div class="cv" id="cvF"></div><div class="run">▶ Test workflow</div></div>
+  <div class="abs" id="gen" style="left:1430px;top:540px;display:flex;flex-direction:column;gap:12px">
+    <span class="pill" style="font-size:22px;background:#2b2b35">✍️ Social captions</span><span class="pill" style="font-size:22px;background:#2b2b35">🏷 Product descriptions</span><span class="pill" style="font-size:22px;background:#2b2b35">💡 Campaign ideas</span></div>
+</div>
+
+<div class="clip" id="sG" data-start="85.30" data-duration="7.90" data-track-index="2">
+  <div id="dash"><div class="hd"><i></i>Sun N Shade · Private dashboard<span>live</span></div>
+    <div class="gr">
+      <div class="dt" id="d1"><div class="k">Inquiries</div><div class="s">website + email</div><div class="bars"><i style="background:#f1d48a"></i><i style="background:#f1d48a"></i><i style="background:#f1d48a"></i><i style="background:#f1d48a"></i><i style="background:#f1d48a"></i><i style="background:#f1d48a"></i><i style="background:#f1d48a"></i></div></div>
+      <div class="dt" id="d2"><div class="k">Sales activity</div><div class="s">leads → follow-ups → sales</div><svg width="740" height="170" fill="none"><path class="dl" d="M0 150 C 120 140, 200 100, 300 110 S 500 60, 600 50 S 700 30, 740 20" stroke="#36c97b" stroke-width="5"/></svg></div>
+      <div class="dt" id="d3"><div class="k">Marketing performance</div><div class="s">traffic · search · campaigns</div><svg width="740" height="170" fill="none"><path class="dl" d="M0 140 C 100 130, 180 120, 280 90 S 480 100, 560 70 S 690 40, 740 30" stroke="#ff6d5a" stroke-width="5"/><path class="dl" d="M0 160 C 120 150, 220 150, 320 130 S 520 120, 620 100 S 710 90, 740 80" stroke="#9b8cff" stroke-width="5"/></svg></div>
+      <div class="dt" id="d4"><div class="k">Automation statistics</div><div class="s">workflow runs</div><div class="bars"><i style="background:#9b8cff"></i><i style="background:#9b8cff"></i><i style="background:#9b8cff"></i><i style="background:#9b8cff"></i><i style="background:#9b8cff"></i><i style="background:#9b8cff"></i><i style="background:#9b8cff"></i></div></div>
+    </div></div>
+</div>
+
+<div class="clip" id="sH" data-start="93.00" data-duration="5.05" data-track-index="2">
+  <div class="abs" id="sys"><div class="card"><div class="v" style="color:#9b8cff" id="c1">0</div><div class="l">specialized AI agents</div></div><div class="card"><div class="v" style="color:#ff6d5a" id="c2">0</div><div class="l">connected workflows</div></div><div class="card"><div class="v" style="color:#f1d48a" id="c3">0</div><div class="l">centralized system</div></div></div>
+  <div class="abs" id="wfg"></div>
+</div>
+
+<div class="clip" id="sI" data-start="98.05" data-duration="10.35" data-track-index="2">
+  <div class="abs" id="calm"><div class="row" id="cr1">The owners <span style="color:#f1d48a">don't change</span> a thing.</div><div class="row" id="cr2" style="font-size:64px;color:var(--soft);margin-top:40px">We automate the <span style="color:#ff6d5a">background work</span>.</div><div class="row" id="cr3" style="font-size:64px;color:var(--soft)">They focus on <span style="color:#fff">serving their customers</span>.</div></div>
+</div>
+
+<div class="clip" id="sJ" data-start="108.35" data-duration="6.85" data-track-index="2">
+  <div class="card abs" id="bridge"><div class="mono" style="font-size:22px;color:#ff6d5a">Next</div><div class="h3" style="margin-top:14px">Automating <span style="color:#9b8cff">my own work</span> too →</div></div>
+</div>
+
+<script>
+const K = FW({ id: 'ch4', chapter: 4, duration: DUR, palette: ['#100c14', '#a02a4a', '#ff6d5a', '#5b3cff'], doneAt: DUR - 0.8 });
+const { tl, IN, INS, OUT, DRAW, COUNT, TYPE } = K;
+K.TITLE('tc', 0.05, 2.75);
+
+// ---------- n8n flow builder ----------
+const ICON = {
+  gmail: '<div class="ic" style="background:#fff"><svg width="40" height="30" viewBox="0 0 40 30"><path d="M2 4 L20 18 L38 4" fill="none" stroke="#ea4335" stroke-width="5" stroke-linejoin="round"/><path d="M2 4 V28 M38 4 V28" stroke="#4285f4" stroke-width="5"/></svg></div>',
+  ai: '<div class="ic" style="background:#5b3cff"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3"><rect x="5" y="10" width="26" height="20" rx="6"/><path d="M18 4 V10"/><circle cx="13" cy="20" r="2.5" fill="#fff"/><circle cx="23" cy="20" r="2.5" fill="#fff"/></svg></div>',
+  sw: '<div class="ic" style="background:#3a3a46"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M4 18 H14 M14 18 L30 6 M14 18 H30 M14 18 L30 30"/></svg></div>',
+  sheets: '<div class="ic" style="background:#0f9d58"><svg width="30" height="34" viewBox="0 0 30 34" fill="none" stroke="#fff" stroke-width="3"><rect x="2" y="2" width="26" height="30" rx="3"/><path d="M2 13 H28 M2 22 H28 M13 13 V32"/></svg></div>',
+  tg: '<div class="ic" style="background:#2aabee"><svg width="34" height="30" viewBox="0 0 34 30"><path d="M2 14 L32 2 L26 28 L16 20 L12 28 L11 18 Z" fill="#fff"/></svg></div>',
+  hook: '<div class="ic" style="background:#ea4b71"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><circle cx="17" cy="10" r="6"/><path d="M14 15 L8 26 M20 15 L26 26 M8 26 H26"/></svg></div>',
+  set: '<div class="ic" style="background:#3a7bd5"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M6 26 L22 10 L26 14 L10 30 H6 Z"/></svg></div>',
+  wait: '<div class="ic" style="background:#8a5a2a"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><circle cx="17" cy="17" r="13"/><path d="M17 9 V17 L23 21"/></svg></div>',
+  ga: '<div class="ic" style="background:#f9ab00"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="4" y="18" width="7" height="12" rx="3" fill="#fff"/><rect x="14" y="10" width="7" height="20" rx="3" fill="#fff"/><rect x="24" y="3" width="7" height="27" rx="3" fill="#fff"/></svg></div>',
+  gsc: '<div class="ic" style="background:#4285f4"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><circle cx="14" cy="14" r="9"/><path d="M21 21 L30 30"/></svg></div>',
+  crm: '<div class="ic" style="background:#c9a24a"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#fff" stroke-width="3.5"><circle cx="17" cy="12" r="6"/><path d="M6 30 C 8 22, 26 22, 28 30"/></svg></div>',
+  merge: '<div class="ic" style="background:#3a3a46"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M4 6 L18 18 L4 30 M18 18 H32"/></svg></div>',
+  ok: '<div class="ic" style="background:#36c97b"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#0b1a12" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18 L14 25 L28 9"/></svg></div>',
+  send: '<div class="ic" style="background:#ff6d5a"><svg width="34" height="34" viewBox="0 0 34 34"><path d="M4 16 L30 4 L22 30 L16 20 Z" fill="#fff"/></svg></div>',
+};
+function flow(cv, nodes, edges) {
+  const host = document.getElementById(cv), W = 1700, H = 772;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('class', 'edges'); svg.setAttribute('width', W); svg.setAttribute('height', H);
+  host.parentNode.appendChild(svg);
+  const pos = {};
+  nodes.forEach(n => { pos[n.id] = n;
+    host.parentNode.insertAdjacentHTML('beforeend', `<div class="nd ${n.tr ? 'tr' : ''}" id="${cv}-${n.id}" style="left:${n.x}px;top:${n.y + 58}px"><div class="bx">${ICON[n.icon]}</div>${n.tr ? '' : '<i class="hl"></i>'}<i class="hr"></i><div class="ok">✓</div><div class="lb">${n.label}<span class="sb">${n.sub || ''}</span></div></div>`); });
+  edges.forEach(([a, b], i) => { const A = pos[a], B = pos[b], x1 = A.x + 110, y1 = A.y + 52, x2 = B.x - 6, y2 = B.y + 52, mx = (x1 + x2) / 2;
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', `M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`);
+    p.setAttribute('stroke', '#5c5c6e'); p.setAttribute('stroke-width', '3'); p.setAttribute('fill', 'none'); p.setAttribute('id', `${cv}-e${i}`); svg.appendChild(p);
+    host.parentNode.insertAdjacentHTML('beforeend', `<div class="pkt" id="${cv}-p${i}"></div><div class="cnt" id="${cv}-c${i}" style="left:${mx - 22}px;top:${(y1 + y2) / 2 + 58 - 28}px">1 item</div>`); });
+  return {
+    node: (id, t) => tl.fromTo(`#${cv}-${id}`, { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .55, ease: 'power3.out' }, t),
+    edge: (i, t, d) => { const p = document.getElementById(`${cv}-e${i}`), L = p.getTotalLength(); p.style.strokeDasharray = L;
+      tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d || .5, ease: 'power2.inOut' }, t); },
+    run: (id, t) => { tl.to(`#${cv}-${id} .bx`, { borderColor: '#36c97b', boxShadow: '0 0 26px rgba(54,201,123,.45)', duration: .3 }, t); tl.to(`#${cv}-${id} .ok`, { scale: 1, duration: .35, ease: 'power3.out' }, t + .05); },
+    pkt: (i, t, d) => { const p = document.getElementById(`${cv}-e${i}`), el = `#${cv}-p${i}`, o = { a: 0 }, D = d || .7;
+      tl.set(el, { opacity: 1 }, t); tl.to(o, { a: 1, duration: D, ease: 'power1.inOut', onUpdate: () => { const L = p.getTotalLength(), q = p.getPointAtLength(o.a * L); const e = document.querySelector(el); e.style.left = q.x + 'px'; e.style.top = (q.y + 58) + 'px'; } }, t);
+      tl.set(el, { opacity: 0 }, t + D); tl.to(`#${cv}-e${i}`, { stroke: '#36c97b', duration: .3 }, t + D - .2); tl.to(`#${cv}-c${i}`, { opacity: 1, duration: .3 }, t + D); },
+  };
+}
+
+// A · project (2.8 - 9.3)
+IN('#ak', 2.9, { x: -30 });
+tl.fromTo('#plan', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .7, ease: 'power3.out' }, 3.4);
+tl.fromTo('#fp', { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: .35, ease: 'power3.in' }, 6.3);
+OUT('#ak, #plan', 9.0);
+
+// B · the store (9.3 - 21.2)
+K.BG(9.2, ['#120e0a', '#8a6a1a', '#f1d48a', '#ff6d5a']);
+tl.fromTo('#store', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .8, ease: 'power3.out' }, 9.4);
+tl.fromTo('#store .sign', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .6, ease: 'power3.out' }, 10.2);
+IN('#yrs', 12.5, { x: 40 }); COUNT('#yn', 12.6, 40, 1.2);
+tl.fromTo('#manual .card', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .5, ease: 'power3.out', stagger: .25 }, 14.4);
+tl.to('#manual .card b', { rotation: 8, duration: .12, yoyo: true, repeat: 9, ease: 'sine.inOut', stagger: .1 }, 16.0);
+tl.to('#store', { scale: .97, filter: 'saturate(.6)', duration: 2, ease: 'sine.inOut' }, 17.2);
+OUT('#store, #yrs, #manual', 20.9);
+
+// C · n8n as the engine (21.3 - 30.3)
+K.BG(21.2, ['#100c14', '#a02a4a', '#ff6d5a', '#5b3cff']);
+tl.fromTo('#edC', { opacity: 0, y: 80, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'power3.out' }, 21.4);
+TYPE('#wfn', 22.3, 'AI Growth System', 1.2);
+tl.fromTo('#eng', { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .7, ease: 'power3.out' }, 27.3);
+tl.to('#eng > div:first-child', { scale: 1.08, duration: .5, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 28.2);
+OUT('#edC', 30.0);
+
+// D · Gmail flow (30.3 - 44.6)
+const fD = flow('cvD', [
+  { id: 'g', x: 130, y: 300, icon: 'gmail', label: 'Gmail Trigger', sub: 'On new email', tr: 1 },
+  { id: 'a', x: 430, y: 300, icon: 'ai', label: 'AI Agent', sub: 'analyze + categorize' },
+  { id: 's', x: 730, y: 300, icon: 'sw', label: 'Switch', sub: 'by category' },
+  { id: 'l', x: 1080, y: 120, icon: 'gmail', label: 'Gmail', sub: 'add label' },
+  { id: 'n', x: 1080, y: 300, icon: 'tg', label: 'Telegram', sub: 'notify: important' },
+  { id: 'r', x: 1080, y: 480, icon: 'sheets', label: 'Google Sheets', sub: 'record inquiry' },
+], [['g', 'a'], ['a', 's'], ['s', 'l'], ['s', 'n'], ['s', 'r']]);
+tl.fromTo('#edD', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: .7, ease: 'power3.out' }, 30.3);
+fD.node('g', 31.5); fD.run('g', 32.7);
+fD.edge(0, 33.2); fD.node('a', 33.6); fD.pkt(0, 33.7); fD.run('a', 34.4);
+fD.edge(1, 34.8); fD.node('s', 35.0); fD.pkt(1, 35.1); fD.run('s', 35.8);
+fD.edge(2, 36.3); fD.node('l', 36.6); fD.pkt(2, 36.6); fD.run('l', 37.4);
+fD.edge(3, 38.4); fD.node('n', 38.8); fD.pkt(3, 39.0); fD.run('n', 39.8);
+fD.edge(4, 41.3); fD.node('r', 41.8); fD.pkt(4, 42.0); fD.run('r', 42.8);
+OUT('#edD', 44.3);
+
+// E · website leads (44.6 - 65.1)
+const fE = flow('cvE', [
+  { id: 'w', x: 90, y: 300, icon: 'hook', label: 'Webhook', sub: 'inquiry form', tr: 1 },
+  { id: 'e', x: 280, y: 300, icon: 'set', label: 'Edit Fields', sub: 'extract details' },
+  { id: 'i', x: 470, y: 300, icon: 'ai', label: 'AI Agent', sub: 'detect interest' },
+  { id: 'c', x: 660, y: 300, icon: 'crm', label: 'Create Lead', sub: 'sales pipeline' },
+  { id: 't', x: 850, y: 300, icon: 'tg', label: 'Telegram', sub: 'send to owners' },
+  { id: 'f', x: 1040, y: 300, icon: 'wait', label: 'Wait', sub: 'follow-up reminder' },
+], [['w', 'e'], ['e', 'i'], ['i', 'c'], ['c', 't'], ['t', 'f']]);
+tl.fromTo('#edE', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: .7, ease: 'power3.out' }, 44.6);
+tl.fromTo('#prod', { opacity: 0, y: 80, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .7, ease: 'power3.out' }, 45.5);
+TYPE('#f1', 47.6, 'Riya · riya@example.com', 1.3); TYPE('#f2', 49.0, 'Do you have this in a smaller size?', 1.1);
+tl.to('#sub2', { scale: .92, duration: .1, yoyo: true, repeat: 1 }, 50.4);
+tl.to('#prod', { opacity: 0, x: -120, scale: .85, duration: .6, ease: 'power2.inOut' }, 50.7);
+fE.node('w', 50.9); fE.run('w', 51.2);
+fE.edge(0, 51.6); fE.node('e', 52.0); fE.pkt(0, 52.0); fE.run('e', 52.7);
+fE.edge(1, 53.0); fE.node('i', 53.2); fE.pkt(1, 53.3); fE.run('i', 54.9);
+fE.edge(2, 55.5); fE.node('c', 55.8); fE.pkt(2, 55.9); fE.run('c', 56.7);
+fE.edge(3, 59.6); fE.node('t', 60.0); fE.pkt(3, 60.1); fE.run('t', 60.8);
+tl.fromTo('#tg', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: .7, ease: 'power3.out' }, 60.6);
+tl.fromTo('#tg1', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' }, 61.1);
+tl.set('#tgs', { textContent: 'Contacted ✓' }, 62.6); tl.fromTo('#tgs', { color: '#2aabee' }, { color: '#36c97b', duration: .3 }, 62.6);
+fE.edge(4, 63.0); fE.node('f', 63.2); fE.pkt(4, 63.3); fE.run('f', 63.9);
+tl.fromTo('#tg2', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' }, 63.6);
+OUT('#edE, #tg', 64.8);
+
+// F · marketing agents (65.1 - 85.3)
+K.BG(65.0, ['#0e0c18', '#4a2ab0', '#9b8cff', '#ff6d5a']);
+const fF = flow('cvF', [
+  { id: 'g1', x: 120, y: 90, icon: 'ga', label: 'Traffic Agent', sub: 'website traffic' },
+  { id: 'g2', x: 120, y: 290, icon: 'gsc', label: 'Search Agent', sub: 'Google search' },
+  { id: 'g3', x: 120, y: 490, icon: 'ai', label: 'Interest Agent', sub: 'customer interests' },
+  { id: 'm', x: 400, y: 290, icon: 'merge', label: 'Merge', sub: 'combine insights' },
+  { id: 'x', x: 640, y: 290, icon: 'ai', label: 'Marketing Agent', sub: 'SEO + opportunities' },
+  { id: 'w', x: 880, y: 290, icon: 'wait', label: 'Approval', sub: 'owner reviews' },
+  { id: 'p', x: 1110, y: 290, icon: 'send', label: 'Publish', sub: 'after approval' },
+], [['g1', 'm'], ['g2', 'm'], ['g3', 'm'], ['m', 'x'], ['x', 'w'], ['w', 'p']]);
+tl.fromTo('#edF', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: .7, ease: 'power3.out' }, 65.15);
+fF.node('g1', 69.3); fF.node('g2', 70.5); fF.node('g3', 72.4);
+fF.edge(0, 72.9); fF.edge(1, 73.0); fF.edge(2, 73.1); fF.node('m', 73.2);
+fF.pkt(0, 73.3); fF.pkt(1, 73.4); fF.pkt(2, 73.5); fF.run('g1', 73.3); fF.run('g2', 73.4); fF.run('g3', 73.5); fF.run('m', 74.3);
+fF.edge(3, 74.6); fF.node('x', 74.8); fF.pkt(3, 74.9); fF.run('x', 75.7);
+tl.fromTo('#gen .pill', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .5, ease: 'power3.out', stagger: 1.1 }, 79.1);
+fF.edge(4, 83.2); fF.node('w', 83.4); fF.pkt(4, 83.5); fF.run('w', 84.2);
+fF.edge(5, 84.3); fF.node('p', 84.4); fF.pkt(5, 84.4, .5); fF.run('p', 84.95);
+OUT('#edF, #gen', 85.05);
+
+// G · dashboard (85.3 - 93.2)
+tl.fromTo('#dash', { opacity: 0, y: 80, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'power3.out' }, 85.4);
+[88.35, 89.15, 90.3, 91.5].forEach((t, i) => tl.fromTo('#d' + (i + 1), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, t));
+tl.fromTo('#d1 .bars i', { scaleY: 0 }, { scaleY: i => [.35, .5, .45, .7, .6, .85, 1][i], duration: .5, ease: 'power3.out', stagger: .06 }, 88.6);
+DRAW('#d2 .dl', 89.4, 1.2); DRAW('#d3 .dl', 90.5, 1.2);
+tl.fromTo('#d4 .bars i', { scaleY: 0 }, { scaleY: i => [.5, .6, .55, .8, .7, .9, 1][i], duration: .5, ease: 'power3.out', stagger: .06 }, 91.7);
+OUT('#dash', 92.9);
+
+// H · 6 / 16 / 1 (93 - 98)
+const wfg = document.getElementById('wfg'); for (let i = 0; i < 16; i++) wfg.insertAdjacentHTML('beforeend', `<i class="${[1, 4, 6, 9, 12, 14].includes(i) ? 'ag' : ''}"></i>`);
+tl.fromTo('#sys .card', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: .55, ease: 'power3.out', stagger: 0 }, 0); tl.set('#sys .card', { opacity: 0 }, 0);
+[[1, 93.0], [2, 94.85], [3, 96.7]].forEach(([i, t]) => IN(`#sys .card:nth-child(${i})`, t, { y: 50 }));
+COUNT('#c1', 93.1, 6, .7); COUNT('#c2', 94.95, 16, .8); COUNT('#c3', 96.8, 1, .3);
+tl.fromTo('#wfg i', { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .35, ease: 'power3.out', stagger: .07 }, 95.0);
+OUT('#sys, #wfg', 97.75);
+
+// I · the best part (98 - 108.4)
+K.BG(98.0, ['#120e0a', '#8a6a1a', '#f1d48a', '#ff6d5a']);
+IN('#cr1', 98.15, { y: 40 }); IN('#cr2', 102.5, { y: 30 }); IN('#cr3', 104.9, { y: 30 });
+OUT('#calm', 108.1);
+
+// J · bridge (108.4 - 115.2)
+K.BG(108.3, ['#0c0e18', '#3a2ab0', '#9b8cff', '#0AF0F0']);
+tl.fromTo('#bridge', { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: .7, ease: 'power3.out' }, 108.5);
+tl.to('#bridge', { x: 140, duration: 4, ease: 'sine.inOut' }, 110.0);
+OUT('#bridge', 114.7);
+
+K.SUBS(SUBS);
+K.done();
+</script>

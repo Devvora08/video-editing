@@ -1,0 +1,187 @@
+<style>
+  /* plan */
+  #mrr { left:360px; top:330px; width:1200px; }
+  #mrr .k { font-size:24px; margin-bottom:24px; }
+  #mrr .track { height:30px; border-radius:99px; background:rgba(255,255,255,.07); border:1px solid var(--line); overflow:hidden; }
+  #mrr .fill { height:100%; width:100%; background:linear-gradient(90deg,#ff2d55,#ff8a3d); transform-origin:left; transform:scaleX(.012); border-radius:99px; }
+  #mrr .ends { display:flex; justify-content:space-between; margin-top:20px; font-size:52px; font-weight:700; }
+  #mrr .ends small { font-size:26px; color:var(--soft); font-weight:500; margin-left:10px; }
+  #pubst { left:1290px; top:560px; color:var(--red); font-size:40px; transform:rotate(-6deg); }
+  #docs { left:360px; top:610px; display:flex; gap:14px; }
+  #docs i { width:34px; height:34px; border-radius:8px; background:rgba(255,45,85,.18); border:1px solid rgba(255,45,85,.5); display:block; }
+
+  /* six shorts */
+  #cards { left:0; right:0; top:250px; display:flex; justify-content:center; gap:26px; }
+  .sc { width:220px; height:391px; border-radius:20px; overflow:hidden; position:relative; background:#111 center/cover; box-shadow:0 30px 70px rgba(0,0,0,.6); border:1px solid rgba(255,255,255,.12); }
+  .sc .lb { position:absolute; left:12px; top:12px; padding:6px 12px; border-radius:10px; background:rgba(0,0,0,.65); font-family:"Geist Mono"; font-size:16px; letter-spacing:.12em; }
+  .sc .yt { position:absolute; right:12px; bottom:12px; width:40px; height:40px; border-radius:12px; background:#FF0033; display:flex; align-items:center; justify-content:center; }
+  .sc.gen { background:linear-gradient(160deg,#2a0d1a,#0e0710); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; }
+  .sc.gen .avatar { width:96px; height:96px; } .sc.gen .dl { font-family:"Geist"; font-weight:300; font-size:38px; } .sc.gen .dl b { font-weight:600; color:#ff6b86; }
+  #tags { left:0; right:0; top:700px; display:flex; justify-content:center; gap:22px; }
+
+  /* daily loop */
+  #loop { left:560px; top:180px; width:800px; height:720px; }
+  .ln { position:absolute; width:210px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .ln .ic { width:110px; height:110px; border-radius:30px; background:rgba(255,255,255,.07); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; }
+  .ln .t { font-size:30px; font-weight:700; }
+  #clock { position:absolute; left:960px; top:600px; width:200px; height:200px; margin:-100px 0 0 -100px; border-radius:50%; border:3px solid rgba(255,255,255,.25); }
+  #clock i { position:absolute; left:50%; bottom:50%; width:4px; margin-left:-2px; background:#fff; border-radius:2px; transform-origin:bottom; }
+  #clock .hh { height:56px; } #clock .mh { height:80px; background:var(--red); }
+  #morn { left:0; right:0; top:150px; text-align:center; }
+
+  /* studio */
+  #studio { left:170px; top:140px; width:1580px; height:820px; background:#282828; }
+  #studio .top { height:64px; background:#282828; border-bottom:1px solid #3f3f3f; display:flex; align-items:center; padding:0 26px; gap:16px; font-size:22px; color:#f1f1f1; }
+  #studio .top .lg { display:flex; align-items:center; gap:10px; font-weight:700; }
+  #studio .top .lg i { width:36px; height:25px; border-radius:7px; background:#FF0033; display:block; }
+  #studio .side { position:absolute; left:0; top:64px; bottom:0; width:250px; background:#212121; padding:30px 0; }
+  #studio .side .me { display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:26px; }
+  #studio .side .me .avatar { width:100px; height:100px; }
+  #studio .side .me span { font-size:18px; color:#aaa; } #studio .side .me b { font-size:20px; color:#f1f1f1; }
+  #studio .side .it { padding:14px 30px; font-size:20px; color:#aaa; }
+  #studio .side .it.on { background:#3f3f3f; color:#fff; border-left:4px solid #FF0033; }
+  #studio .main { position:absolute; left:280px; top:94px; right:40px; bottom:30px; }
+  #studio .main h4 { font-size:34px; font-weight:500; color:#f1f1f1; margin-bottom:20px; }
+  #studio .tabs { display:flex; gap:40px; font-size:20px; color:#aaa; border-bottom:1px solid #3f3f3f; padding-bottom:14px; margin-bottom:26px; }
+  #studio .tabs b { color:#fff; border-bottom:3px solid #fff; padding-bottom:12px; }
+  .scard { position:absolute; background:#1f1f1f; border:1px solid #3f3f3f; border-radius:12px; padding:24px 28px; }
+  .scard .ttl { font-size:22px; color:#f1f1f1; margin-bottom:6px; } .scard .sub { font-size:16px; color:#aaa; margin-bottom:22px; }
+  #vs .bar { height:22px; border-radius:11px; background:#3f3f3f; overflow:hidden; } #vs .bar i { display:block; height:100%; width:100%; background:#3ea6ff; transform-origin:left; }
+  #vs .lg2 { display:flex; justify-content:space-between; margin-top:12px; font-size:17px; color:#aaa; }
+
+  /* stats */
+  #stats { left:0; right:0; top:330px; display:flex; justify-content:center; gap:36px; }
+  #stats .card { width:400px; padding:44px 40px; text-align:center; }
+  #stats .v { font-size:120px; font-weight:700; letter-spacing:-.04em; line-height:1; }
+  #stats .l { font-size:30px; color:var(--soft); margin-top:12px; }
+  /* drop */
+  #drop { left:300px; top:220px; width:1320px; height:620px; padding:40px 50px; }
+  #drop .ttl { font-size:30px; font-weight:700; }
+  #drop svg { position:absolute; left:50px; top:120px; }
+  #ring { position:absolute; left:325px; top:205px; width:190px; height:190px; border:5px solid var(--red); border-radius:50%; box-shadow:0 0 40px rgba(255,45,85,.5); }
+  #qm { position:absolute; left:520px; top:150px; font-size:120px; font-weight:700; color:var(--red); }
+</style>
+
+<div class="clip" id="sT" data-start="0" data-duration="2.85" data-track-index="2">
+  <div class="tcard" id="tc"><div class="k">CHAPTER 01</div><div class="box"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i><div class="tt">One Week, Six Shorts</div></div></div>
+</div>
+
+<div class="clip" id="sP" data-start="2.75" data-duration="7.30" data-track-index="2">
+  <div class="h3 abs" id="ph" style="left:360px;top:200px">The plan was <span class="rd">simple.</span></div>
+  <div class="abs" id="mrr"><div class="k mono" style="color:var(--soft)">Monthly recurring revenue</div><div class="track"><div class="fill"></div></div>
+    <div class="ends"><span>$0<small>today</small></span><span class="rd">$1,000<small>/ month</small></span></div></div>
+  <div class="abs" id="docs"></div>
+  <div class="abs stamp" id="pubst">IN PUBLIC</div>
+</div>
+
+<div class="clip" id="sS" data-start="10.00" data-duration="7.45" data-track-index="2">
+  <div class="abs" id="cards">
+    <div class="sc gen"><div class="avatar"></div><div class="dl">Day <b>01</b></div><span class="lb">DAY 1</span></div>
+    <div class="sc" style="background-image:url(img/thumb1.png)"><span class="lb">DAY 2</span><span class="yt"><svg width="18" height="18" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></span></div>
+    <div class="sc" style="background-image:url(img/thumb2.png)"><span class="lb">DAY 3</span><span class="yt"><svg width="18" height="18" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></span></div>
+    <div class="sc" style="background-image:url(img/thumb3.png)"><span class="lb">DAY 4</span><span class="yt"><svg width="18" height="18" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></span></div>
+    <div class="sc" style="background-image:url(img/thumb4.png)"><span class="lb">DAY 5</span><span class="yt"><svg width="18" height="18" viewBox="0 0 64 64"><path d="M20 12 L54 32 L20 52Z" fill="#fff"/></svg></span></div>
+    <div class="sc gen"><div class="avatar"></div><div class="dl">Day <b>06</b></div><span class="lb">DAY 6</span></div>
+  </div>
+  <div class="abs" id="tags"><span class="pill">🛠 What I worked on</span><span class="pill">💡 What I learned</span><span class="pill">🤝 Clients</span></div>
+</div>
+
+<div class="clip" id="sL" data-start="17.45" data-duration="9.80" data-track-index="2">
+  <div class="h3 abs" id="morn">A short a day <span class="rd">isn't just recording</span></div>
+  <svg width="1920" height="1080" style="position:absolute;left:0;top:0" fill="none"><circle id="ring1" cx="960" cy="600" r="260" stroke="rgba(255,255,255,.16)" stroke-width="3" stroke-dasharray="8 12"/><circle id="runner" r="11" fill="#FF2D55"/></svg>
+  <div id="clock"><i class="hh"></i><i class="mh"></i></div>
+  <div class="ln" id="n1" style="left:855px;top:285px"><div class="ic"><svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"><circle cx="28" cy="28" r="16"/><path d="M40 40 L54 54"/></svg></div><div class="t">Research</div></div>
+  <div class="ln" id="n2" style="left:1102px;top:465px"><div class="ic"><svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"><path d="M16 8h24l10 10v38H16z M24 30h18 M24 40h18"/></svg></div><div class="t">Script</div></div>
+  <div class="ln" id="n3" style="left:1008px;top:755px"><div class="ic"><svg width="52" height="52" viewBox="0 0 64 64"><circle cx="32" cy="32" r="16" fill="#FF2D55"/></svg></div><div class="t">Record</div></div>
+  <div class="ln" id="n4" style="left:702px;top:755px"><div class="ic"><svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"><path d="M10 20h44 M10 32h30 M10 44h40"/></svg></div><div class="t">Edit</div></div>
+  <div class="ln" id="n5" style="left:608px;top:465px"><div class="ic"><svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 46V14 M18 28l14-14 14 14 M14 52h36"/></svg></div><div class="t">Upload</div></div>
+</div>
+
+<div class="clip" id="sU" data-start="27.05" data-duration="7.00" data-track-index="2">
+  <div class="win" id="studio">
+    <div class="top"><div class="lg"><i></i>Studio</div></div>
+    <div class="side"><div class="me"><div class="avatar"></div><span>Your channel</span><b>Dev Vora</b></div>
+      <div class="it">Dashboard</div><div class="it">Content</div><div class="it on" id="anl">Analytics</div><div class="it">Community</div><div class="it">Subtitles</div></div>
+    <div class="main"><h4>Channel analytics</h4><div class="tabs"><b>Overview</b><span>Content</span><span>Audience</span><span>Research</span></div>
+      <div class="scard" id="vs" style="left:0;top:110px;width:560px"><div class="ttl">Viewed vs. swiped away</div><div class="sub">Shorts · last 7 days</div><div class="bar"><i></i></div><div class="lg2"><span>Viewed</span><span>Swiped away</span></div></div>
+      <div class="scard" id="ret" style="left:600px;top:110px;width:620px;height:420px"><div class="ttl">Audience retention</div><div class="sub">Average across shorts</div>
+        <svg width="560" height="280" fill="none" style="position:absolute;left:30px;top:110px"><path d="M0 260H560 M0 190H560 M0 120H560 M0 50H560" stroke="#3f3f3f" stroke-width="1"/>
+          <path id="retl" d="M0 20 C 40 30, 70 140, 120 170 S 300 200, 380 214 S 500 228, 560 236" stroke="#3ea6ff" stroke-width="5"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<div class="clip" id="sN" data-start="33.85" data-duration="7.70" data-track-index="2">
+  <div class="h3 abs" id="nh" style="left:0;right:0;top:190px;text-align:center">After <span class="rd">one week</span></div>
+  <div class="abs" id="stats">
+    <div class="card" id="st1"><div class="v" id="v1">0</div><div class="l">shorts</div></div>
+    <div class="card" id="st2"><div class="v rd" id="v2">0</div><div class="l">views</div></div>
+    <div class="card" id="st3"><div class="v" id="v3">0</div><div class="l">subscribers</div></div>
+  </div>
+</div>
+
+<div class="clip" id="sD" data-start="41.40" data-duration="6.68" data-track-index="2">
+  <div class="card abs" id="drop"><div class="ttl">Audience retention <span style="color:var(--soft);font-weight:500">· what the numbers showed</span></div>
+    <svg width="1220" height="440" fill="none"><path d="M0 420H1220 M0 300H1220 M0 180H1220 M0 60H1220" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+      <path id="dropl" d="M0 30 C 90 40, 160 230, 260 290 S 640 340, 820 352 S 1100 370, 1220 380" stroke="#FF2D55" stroke-width="7"/></svg>
+    <div id="ring"></div><div id="qm">?</div></div>
+</div>
+
+<script>
+const K = FW({ id: 'ch1', chapter: 1, duration: DUR, palette: ['#120309', '#8e0f26', '#ff2d55', '#4a0a8a'], doneAt: DUR - 0.8 });
+const { tl, IN, INS, OUT, DRAW, COUNT } = K;
+K.TITLE('tc', 0.05, 2.75);
+
+// the plan (2.8 - 10)
+IN('#ph', 2.85);
+IN('#mrr', 4.45, { x: -40 });
+tl.to('#mrr .fill', { scaleX: 1, duration: 1.1, ease: 'power2.inOut' }, 5.6); tl.to('#mrr .fill', { scaleX: .012, duration: .7, ease: 'power2.inOut' }, 6.9);
+const docs = document.getElementById('docs'); for (let i = 0; i < 18; i++) docs.insertAdjacentHTML('beforeend', '<i></i>');
+tl.fromTo('#docs i', { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .3, ease: 'power3.out', stagger: .06 }, 7.3);
+tl.fromTo('#pubst', { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: .35, ease: 'power3.in' }, 9.15);
+OUT('#ph, #mrr, #docs, #pubst', 9.7);
+
+// six shorts (10 - 17.4)
+tl.fromTo('#cards .sc', { opacity: 0, y: 120, rotation: (i) => (i - 2.5) * 4 }, { opacity: 1, y: 0, rotation: 0, duration: .7, ease: 'power3.out', stagger: .32 }, 10.15);
+[13.3, 14.5, 15.6].forEach((t, i) => IN(`#tags .pill:nth-child(${i + 1})`, t, { y: 30 }));
+tl.to('#cards', { scale: .94, duration: 3, ease: 'sine.inOut' }, 13.2);
+OUT('#cards, #tags', 17.05);
+
+// daily loop (17.5 - 27.2)
+IN('#morn', 17.55);
+DRAW('#ring1', 18.2, 1.0);
+IN('#clock', 20.6, { scale: .7 });
+tl.fromTo('#clock .mh', { rotation: 0 }, { rotation: 1440, duration: 6, ease: 'none' }, 20.7);
+tl.fromTo('#clock .hh', { rotation: 30 }, { rotation: 150, duration: 6, ease: 'none' }, 20.7);
+[21.75, 23.45, 24.65, 25.45, 26.2].forEach((t, i) => IN('#n' + (i + 1), t, { scale: .7, y: 20 }, .55));
+const ring1 = document.getElementById('ring1'), run = { a: 0 };
+tl.fromTo('#runner', { opacity: 0 }, { opacity: 1, duration: .3 }, 21.7);
+tl.to(run, { a: 1, duration: 5.3, ease: 'none', onUpdate: () => { const L = ring1.getTotalLength(); const p = ring1.getPointAtLength(((run.a * 1.0 + .75) % 1) * L); const r = document.getElementById('runner'); r.setAttribute('cx', p.x); r.setAttribute('cy', p.y); } }, 21.7);
+OUT('#sL > *', 26.9);
+
+// YouTube Studio (27.1 - 34)
+tl.fromTo('#studio', { opacity: 0, y: 80, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'power3.out' }, 27.1);
+tl.fromTo('#anl', { backgroundColor: 'rgba(63,63,63,0)' }, { backgroundColor: 'rgba(63,63,63,1)', duration: .3 }, 28.6);
+IN('#vs', 29.7, { y: 30 }); tl.fromTo('#vs .bar i', { scaleX: 0 }, { scaleX: .62, duration: 1, ease: 'power2.out' }, 30.1);
+IN('#ret', 30.6, { y: 30 }); DRAW('#retl', 31.0, 1.6, 'power1.inOut');
+tl.to('#studio', { scale: 1.03, duration: 3.5, ease: 'sine.inOut' }, 30.3);
+OUT('#studio', 33.65);
+
+// one-week stats (33.9 - 41.5)
+IN('#nh', 33.95);
+IN('#st1', 36.9, { y: 50 }); COUNT('#v1', 37.0, 6, .5);
+IN('#st2', 38.15, { y: 50 }); COUNT('#v2', 38.25, 800, 1.0);
+IN('#st3', 39.6, { y: 50 }); COUNT('#v3', 39.7, 12, .8);
+OUT('#nh, #stats', 41.1);
+
+// the unexpected drop (41.5 - 48)
+K.BG(41.3, ['#16030a', '#a8102c', '#ff2d55', '#2a0a6a']);
+tl.fromTo('#drop', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .7, ease: 'power3.out' }, 41.5);
+DRAW('#dropl', 42.0, 1.4, 'power2.out');
+tl.fromTo('#ring', { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: .5, ease: 'power3.out' }, 44.3);
+tl.fromTo('#qm', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, 44.8);
+OUT('#drop', 47.55);
+
+K.SUBS(SUBS);
+K.done();
+</script>

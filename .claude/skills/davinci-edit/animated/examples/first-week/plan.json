@@ -1,0 +1,21 @@
+{
+  "voice": "_work/media/audio/voice-clean.wav",
+  "transcript": "_work/transcripts/raw.json",
+  "music": "_work/media/audio/music-raw.wav",
+  "title_lead": 2.8,
+  "chapters": [
+    {"n": 0, "name": "Intro", "segs": [[2.00, 21.62]]},
+    {"n": 1, "name": "One Week, Six Shorts", "nav": "Daily Shorts", "segs": [[25.18, 69.96]]},
+    {"n": 2, "name": "Quality Over Quantity", "nav": "Quality", "segs": [[73.06, 141.66]]},
+    {"n": 3, "name": "Building the Brand", "nav": "The Brand", "segs": [[144.38, 221.00], [222.29, 229.45]]},
+    {"n": 4, "name": "The n8n Build", "nav": "n8n Build", "segs": [[233.58, 331.58], [332.72, 346.62]]},
+    {"n": 5, "name": "My AI Crew", "nav": "AI Crew", "segs": [[349.32, 374.38], [375.20, 392.24]]},
+    {"n": 6, "name": "Behind This Video", "nav": "Behind This", "segs": [[396.58, 433.90]]}
+  ],
+  "fix": {"shot": "short", "shots": "shorts", "hopes": "hooks", "devora.dev": "devvora.dev", "code": "cold", "Aza": "Aéza", "Annat": "n8n", "N8N": "n8n", "$1000": "$1,000", "rank": ""},
+  "phrase_fix": [["Sun and Shade", "Sun N Shade"], ["here's what I am", "here's where I am"], ["one point for video", "one point per video"],
+    ["I could do cold outreach", "I do cold outreach"], ["I look for topic that", "I'll look for topics that"], ["5 30 a.m. in the morning", "5:30 in the morning"],
+    ["identifies where they", "identifies what they"], ["That's where the exact challenge", "That's exactly the challenge"],
+    ["someone who finds anywhere", "someone who finds me anywhere"], ["each of these run on", "each of these runs on"], ["do it all by my hand", "do it all by hand"],
+    ["file platforms", "five platforms"], ["add captions", "adds captions"], ["Thank you for watching", "Thank you for watching."], ["watching..", "watching."]]
+}
